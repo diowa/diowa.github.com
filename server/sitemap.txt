@@ -1,0 +1,12 @@
+
+http://diowa.github.com/archive.html
+http://diowa.github.com/atom.xml
+http://diowa.github.com/categories.html
+http://diowa.github.com/index.html
+http://diowa.github.com/pages.html
+http://diowa.github.com/portfolio.html
+http://diowa.github.com/rss.xml
+http://diowa.github.com/sitemap.txt
+http://diowa.github.com/tags.html
+
+http://diowa.github.com/Random%20Posts/2013/03/14/first-post

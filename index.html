@@ -1,0 +1,77 @@
+---
+layout: default
+title: Hello World!
+tagline: Supporting tagline
+technologies_list:
+  -
+    name: Ruby on Rails
+    url: http://rubyonrails.org/
+  -
+    name: CoffeeScript
+    url: http://coffeescript.org/
+  -
+    name: Rspec
+    url: http://rspec.info/
+  -
+    name: MongoDB
+    url: http://www.mongodb.org
+  -
+    name: PostgreSQL
+    url: http://www.postgresql.org/
+  -
+    name: Bootstrap
+    url: http://twitter.github.com/bootstrap/
+---
+{% include JB/setup %}
+<div class="row-fluid">
+  <div class="span12 text-center">
+    <h1><img alt="diowa-logo" src="/assets/images/diowa.png" width="230"/></h1>
+    <h2>Web Development Agency</h2>
+  </div>
+  <div class="span12">
+    <h2>Technologies</h2>
+    <p>Each product requires careful decision making. These are the technologies we prefer</p>
+    {% for technology in page.technologies_list %}
+      <a class="btn btn-link" href="{{technology.url}}">{{technology.name}}</a>
+    {% endfor %}
+  </div>
+  <div class="span12">
+    <h2>About us</h2>
+    <div class="row">
+      <div class="span6">
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="http://placehold.it/64x64">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">Cesidio Di Landa</h4>
+            <i class="icon-twitter"></i>
+            <i class="icon-linkedin"></i>
+          </div>
+        </div>
+      </div>
+      <div class="span6">
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="http://placehold.it/64x64">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">Geremia Taglialatela</h4>
+            <i class="icon-twitter"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="span12">
+    <h2>Portfolio</h2>
+    <div class="row">
+      <div class="span4">
+        <h3>Minstrels</h3>
+      </div>
+      <div class="span4">
+        <h3>icare</h3>
+      </div>
+    </div>
+  </div>
+</div>
