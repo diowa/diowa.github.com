@@ -1,3 +1,6 @@
+require 'jekyll'
+require 'tmpdir'
+
 # Change your GitHub reponame
 GITHUB_REPONAME = "diowa/diowa.github.com"
 

@@ -44,6 +44,7 @@ GEM
     pygments.rb (0.5.1)
       posix-spawn (~> 0.3.6)
       yajl-ruby (~> 1.1.0)
+    rake (10.1.0)
     ref (1.0.5)
     safe_yaml (0.7.1)
     syntax (1.0.0)
@@ -61,5 +62,6 @@ DEPENDENCIES
   jekyll
   jekyll-asset-pipeline!
   less
+  rake
   therubyracer
   yui-compressor
