@@ -4,63 +4,15 @@ group: navigation_first
 title: Blog
 ---
 {% include JB/setup %}
-<div id="home-jumbotron" class="jumbotron">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h1><img class="diowa-logo" alt="diowa-logo" src="/assets/images/diowa.svg"/></h1>
-        <h2>Web Development Agency</h2>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <h2>Technologies</h2>
-      <p>Each product requires careful decision making. These are the technologies we prefer</p>
-      {% for technology in page.technologies_list %}
-        <a class="btn btn-link" href="{{technology.url}}">{{technology.name}}</a>
-      {% endfor %}
-    </div>
-    <div class="col-lg-12">
-      <h2>About us</h2>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="media">
-            <a class="pull-left" href="#">
-              <img class="media-object" src="http://placehold.it/64x64">
-            </a>
-            <div class="media-body">
-              <h4 class="media-heading">Cesidio Di Landa</h4>
-              <i class="icon-twitter"></i>
-              <i class="icon-linkedin"></i>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="media">
-            <a class="pull-left" href="#">
-              <img class="media-object" src="http://placehold.it/64x64">
-            </a>
-            <div class="media-body">
-              <h4 class="media-heading">Geremia Taglialatela</h4>
-              <i class="icon-twitter"></i>
-            </div>
-          </div>
-        </div>
+      <div class="page-header">
+        <h1>{{ page.title }} {% if page.tagline %} <small>{{ page.tagline }}</small>{% endif %}</h1>
       </div>
-    </div>
-    <div class="col-lg-12">
-      <h2>Portfolio</h2>
-      <div class="row">
-        <div class="col-lg-12">
-          <h3>Minstrels</h3>
-        </div>
-        <div class="col-lg-12">
-          <h3>icare</h3>
-        </div>
-      </div>
+      {% assign post = site.posts.first %}
+      {% assign content = post.content %}
+      {% include themes/bootstrap/post_detail.html %}
     </div>
   </div>
 </div>

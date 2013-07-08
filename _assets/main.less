@@ -1,154 +1,12 @@
 @import "variables.less";
 @import "mixins.less";
 
-@black: #000;
-@white: #fff;
-
-#home-jumbotron {
-  margin-top: -20px;
-  padding: 40px 20px;
-  border-radius: 0;
-  background: @flat-ui-wet-asphalt;
-
-  .lead {
-    font-size: ceil(@font-size-base * 1.25);
-  }
-
-  h1,
-  h2,
-  h3,
-  .head {
-    margin: 0;
-    line-height: 1;
-    font-weight: 700;
-    color: @white;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-  }
-
-  h1 {
-    display: inline-block;
-    margin: 0 0 10px;
-    padding: 0 0 10px;
-    line-height: 1.1;
-    font-size: ceil(@font-size-base * 3.25);
-  }
-
-  h2 {
-    font-size: ceil(@font-size-base * 1.70);
-    letter-spacing: 0;
-  }
-
-  p.head {
-    font-size: ceil(@font-size-base * 2.70);
-  }
-}
-
-@media(min-width: @grid-float-breakpoint) {
-  #home-jumbotron {
-    padding: 80px 20px;
-  }
-}
-
-@media(min-width: @screen-medium) {
-  #home-jumbotron {
-    padding: 120px 20px;
-
-    h1 {
-      font-size: ceil(@font-size-base * 5.70);
-    }
-
-    h2 {
-      font-size: ceil(@font-size-base * 3.25);
-    }
-  }
+.container {
+  max-width: 700px;
 }
 
 .diowa-logo {
   max-width: 100%;
-}
-
-.navbar-toggle {
-  padding: 9px 13px;
-  border: none;
-
-  &:hover,
-  &:focus {
-    background-color: #ddd;
-  }
-
-  .icon-bar {
-    background-color: @gray-darker;
-  }
-}
-
-@media(min-width: @grid-float-breakpoint) {
-  .navbar {
-    .navbar-nav {
-      li + li {
-        margin-left: 15px;
-      }
-
-      > li > a {
-        text-transform: uppercase;
-        font-weight: bold;
-        color: @link-color;
-
-        &:hover {
-          color: @link-hover-color;
-        }
-
-        &.active {
-          color: @text-color;
-        }
-      }
-    }
-  }
-}
-
-/* Temporary fix for navbar collapse */
-@grid-float-breakpoint-min: @grid-float-breakpoint - 1;
-@media screen and (max-width: @grid-float-breakpoint-min) {
-  .nav-collapse {
-    .nav {
-      float: none;
-      margin: 0 0 (@line-height-computed / 2);
-      li {
-        float: none;
-      }
-    }
-
-    .dropdown-toggle {
-      display: none;
-    }
-
-    .dropdown-menu {
-      position: static;
-      float: none;
-      display: block;
-      padding: 0;
-      background-color: transparent;
-      border: none;
-      border-radius: 0;
-      .box-shadow(none);
-    }
-
-    li {
-      &.divider {
-        display: none;
-      }
-
-      > a {
-        padding: 10px 15px;
-        color: @link-color;
-        &:hover,
-        &:focus {
-          color: @link-hover-color;
-          background: @gray-lighter;
-        }
-      }
-    }
-  }
 }
 
 .oswald {
@@ -163,4 +21,23 @@ h1 {
 
 footer {
   padding: 20px 0;
+}
+
+article {
+  h1, .h1 { font-size: ceil(@font-size-base * 3.25); }
+  h2, .h2 { font-size: ceil(@font-size-base * 2.70); } // ~38px
+  h3, .h3 { font-size: ceil(@font-size-base * 2.25); } // ~32px
+  h4, .h4 { font-size: ceil(@font-size-base * 1.70); } // ~24px
+  h5, .h5 { font-size: ceil(@font-size-base * 1.25); } // ~18px
+  h6, .h6 { font-size: @font-size-base; } // ~14px
+
+  .content {
+    font-size: 1.25em;
+    line-height: 1.5;
+  }
+}
+
+.excerpt-link {
+  color: @text-color !important;
+  text-decoration: none !important;
 }
