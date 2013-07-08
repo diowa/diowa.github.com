@@ -2,6 +2,40 @@
 // Variables
 // --------------------------------------------------
 
+/* Flat UI Palettes */
+@flat-ui-turquoise:     #1abc9c;
+@flat-ui-green-sea:     #16a085;
+
+@flat-ui-emerald:       #2ecc71;
+@flat-ui-nephritis:     #27ae60;
+
+@flat-ui-peter-river:   #3498db;
+@flat-ui-belize-hole:   #2980b9;
+
+@flat-ui-amethyst:      #9b59b6;
+@flat-ui-wisteria:      #8e44ad;
+
+@flat-ui-wet-asphalt:   #34495e;
+@flat-ui-midnight-blue: #2c3e50;
+
+@flat-ui-wet-asphalt:   #34495e;
+@flat-ui-midnight-blue: #2c3e50;
+
+@flat-ui-sun-flower:    #f1c40f;
+@flat-ui-orange:        #f39c12;
+
+@flat-ui-carrot:        #e67e22;
+@flat-ui-pumpkin:       #d35400;
+
+@flat-ui-alizarin:      #e74c3c;
+@flat-ui-pomegranate:   #c0392b;
+
+@flat-ui-clouds:        #ecf0f1;
+@flat-ui-silver:        #bdc3c7;
+
+@flat-ui-concrete:      #95a5a6;
+@flat-ui-asbestos:      #7f8c8d;
+
 
 // Global values
 // --------------------------------------------------
@@ -19,7 +53,7 @@
 // Brand colors
 // -------------------------
 
-@brand-primary:         #428bca;
+@brand-primary:         @flat-ui-pomegranate;
 @brand-success:         #5cb85c;
 @brand-warning:         #f0ad4e;
 @brand-danger:          #d9534f;
@@ -40,7 +74,7 @@
 // Typography
 // -------------------------
 
-@font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-sans-serif:  "Ubuntu","Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 @font-family-monospace:   Monaco, Menlo, Consolas, "Courier New", monospace;
 @font-family-base:        @font-family-sans-serif;
@@ -53,8 +87,8 @@
 @line-height-base:        1.428571429; // 20/14
 @line-height-computed:    floor(@font-size-base * @line-height-base); // ~20px
 
-@headings-font-family:    @font-family-base;
-@headings-font-weight:    500;
+@headings-font-family:    "Oswald";
+@headings-font-weight:    700;
 @headings-line-height:    1.1;
 
 
@@ -172,15 +206,15 @@
 // Basics of a navbar
 @navbar-height:                    50px;
 @navbar-color:                     #777;
-@navbar-bg:                        #eee;
+@navbar-bg:                        @flat-ui-clouds;
 @navbar-padding:                   floor(@grid-gutter-width / 2);  // ~15px
 
 // Navbar links
 @navbar-link-color:                #777;
 @navbar-link-hover-color:          #333;
 @navbar-link-hover-bg:             transparent;
-@navbar-link-active-color:         #555;
-@navbar-link-active-bg:            darken(@navbar-bg, 10%);
+@navbar-link-active-color:         @text-color;
+@navbar-link-active-bg:            transparent;
 @navbar-link-disabled-color:       #ccc;
 @navbar-link-disabled-bg:          transparent;
 

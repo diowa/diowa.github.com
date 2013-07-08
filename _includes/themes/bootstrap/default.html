@@ -6,7 +6,6 @@
     {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
     <meta name="author" content="{{ site.author.name }}">
 
-    <!-- Enable responsive viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -14,13 +13,12 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <!-- Le styles -->
     {% css_asset_tag global %}
     - /_assets/themes/bootstrap/less/bootstrap.less
     - /_assets/main.less
     {% endcss_asset_tag %}
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,900,400italic|Cabin:700" rel="stylesheet" type="text/css" media="all">
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu:400,700|Oswald:700" rel="stylesheet" type="text/css" media="all">
 
     <!-- Le fav and touch icons -->
     <!-- Update these with your own images
@@ -36,30 +34,34 @@
   </head>
 
   <body>
-    <div class="container">
-
-      <div class="content">
-        <!--
-        <div class="navbar">
-          <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="navbar-brand" href="{{ HOME_PATH }}">{{ site.title }}</a>
-          <div class="nav-collapse collapse navbar-responsive-collapse">
-            <ul class="nav">
-              {% assign pages_list = site.pages %}
-              {% assign group = 'navigation' %}
-              {% include JB/pages_list %}
-            </ul>
-          </div>
+    <div class="navbar">
+      <div class="container">
+        <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="navbar-brand" href="{{ HOME_PATH }}">{{ site.title }}</a>
+        <div class="nav-collapse collapse navbar-responsive-collapse">
+          <ul class="nav navbar-nav pull-right">
+            {% assign pages_list = site.pages | sort:"name" %}
+            {% assign group = 'navigation_first' %}
+            {% include JB/pages_list %}
+            {% assign pages_list = site.pages | sort:"name" %}
+            {% assign group = 'navigation' %}
+            {% include JB/pages_list %}
+          </ul>
         </div>
-        -->
-        {{ content }}
       </div>
     </div>
 
+    {{ content }}
+
+    <footer>
+      <div class="container">
+        &copy; diowa 2013
+      </div>
+    </footer>
     <script src="//code.jquery.com/jquery-1.10.2.min.js" ></script>
     {% javascript_asset_tag global %}
     - /_assets/themes/bootstrap/js/button.js
