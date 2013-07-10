@@ -1,0 +1,5 @@
+<ul class="nav nav-justified nav-blog">
+  {% assign pages_list = site.pages | sort:"name" %}
+  {% assign group = 'blog_navigation' %}
+  {% include JB/pages_list %}
+</ul>

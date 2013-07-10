@@ -1,6 +1,11 @@
 @import "variables.less";
 @import "mixins.less";
 
+/* icons-ul fix */
+.icons-ul {
+  padding: 0;
+}
+
 .diowa-logo {
   max-width: 100%;
 }
@@ -36,4 +41,35 @@ article {
 .excerpt-link {
   color: @text-color !important;
   text-decoration: none !important;
+
+  p {
+    float: left;
+  }
+}
+
+@media(min-width: @grid-float-breakpoint) {
+  .nav-blog {
+    margin: 20px 0;
+
+    li {
+      & > a {
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.page-header {
+  border-bottom: 0;
+  margin-top: 0;
+
+  h1 {
+    margin-top: 0;
+  }
+}
+
+footer {
+  color: @gray-light;
+  font-weight: 700;
 }

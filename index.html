@@ -21,36 +21,66 @@ technologies_list:
   -
     name: Bootstrap
     url: http://twitter.github.com/bootstrap/
+products:
+  -
+    image: /assets/images/companycarpool.jpg
+    url: www.companycarpool.com
+    title: Company Carpool
+    description: A solution for companies and organizations interested in providing carpooling to their employees.
+  -
+    image: /assets/images/minstrels.jpg
+    url: beta.minstrels.com
+    title: Minstrels
+    description: Minstrels is a social network designed for travelers. Members share travel stories, meet fellow travelers and ask for or offer hospitality.
+  -
+    image: /assets/images/icare.jpg
+    url: icare.diowa.com
+    title: icare
+    description: icare is an open source carpooling platform used as basis for Company Carpool and other customized carpooling solutions.
 ---
 {% include JB/setup %}
 <div id="home-jumbotron" class="jumbotron">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12 text-center">
+      <div class="col-lg-12">
         <h1>Web Development Agency</h1>
       </div>
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container home-container">
   <div class="row">
     <div class="col-lg-12">
-      <h2>Technologies</h2>
-      <p>Each product requires careful decision making. These are the technologies we prefer</p>
-      {% for technology in page.technologies_list %}
-        <a class="btn btn-link" href="{{technology.url}}">{{technology.name}}</a>
-      {% endfor %}
+      <h2 class="text-center home-title">Our products</h2>
     </div>
-    <div class="col-lg-12">
-      <h2>Portfolio</h2>
-      <div class="row">
-        <div class="col-lg-12">
-          <h3>Minstrels</h3>
-        </div>
-        <div class="col-lg-12">
-          <h3>icare</h3>
-        </div>
+  </div>
+  {% for product in page.products %}
+    <div class="row row-product">
+      <div class="col-sm-5">
+        <a href="http://{{product.url}}"><img class="img-responsive img-thumbnail img-product" src="{{product.image}}"></a>
       </div>
+      <div class="col-sm-7">
+        <h3>{{product.title}}</h3>
+        <p class="lead">
+          {{product.description}}
+          <br>
+          <i class="icon-globe"></i> <a href="http://{{product.url}}">{{product.url}}</a>
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="text-center home-title">Technologies</h2>
+      <p>Each product requires careful decision making. These are the technologies we prefer:</p>
+      <ul class="icons-ul">
+      {% for technology in page.technologies_list %}
+        <li>
+          <i class="icon-li icon-ok"></i>
+          <a href="{{technology.url}}">{{technology.name}}</a>
+        </li>
+      {% endfor %}
+      </ul>
     </div>
   </div>
 </div>
