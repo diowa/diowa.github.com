@@ -4,39 +4,42 @@ title: Web Development Agency
 tagline: Supporting tagline
 technologies_list:
   -
-    name: Ruby on Rails
+    title: Ruby on Rails
     url: http://rubyonrails.org/
+    image: /assets/images/Ruby-on-Rails.png
   -
-    name: CoffeeScript
+    title: CoffeeScript
     url: http://coffeescript.org/
+    image: /assets/images/CoffeeScript.png
   -
-    name: Rspec
-    url: http://rspec.info/
-  -
-    name: MongoDB
-    url: http://www.mongodb.org
-  -
-    name: PostgreSQL
-    url: http://www.postgresql.org/
-  -
-    name: Bootstrap
+    title: Bootstrap
     url: http://twitter.github.com/bootstrap/
+    image: /assets/images/Bootstrap.png
+  -
+    title: MongoDB
+    url: http://www.mongodb.org
+    image: /assets/images/MongoDB.png
+  -
+    title: PostgreSQL
+    url: http://www.postgresql.org/
+    image: /assets/images/PostgreSQL.png
 products:
   -
-    image: /assets/images/companycarpool.jpg
-    url: www.companycarpool.com
     title: Company Carpool
+    url: www.companycarpool.com
+    image: /assets/images/companycarpool.jpg
     description: A solution for companies and organizations interested in providing carpooling to their employees.
   -
-    image: /assets/images/minstrels.jpg
-    url: beta.minstrels.com
     title: Minstrels
+    url: beta.minstrels.com
+    image: /assets/images/minstrels.jpg
     description: Minstrels is a social network designed for travelers. Members share travel stories, meet fellow travelers and ask for or offer hospitality.
   -
-    image: /assets/images/icare.jpg
-    url: icare.diowa.com
     title: icare
-    description: icare is an open source carpooling platform used as basis for Company Carpool and other customized carpooling solutions.
+    url: icare.diowa.com
+    github: diowa/icare
+    image: /assets/images/icare.jpg
+    description: icare is an open source carpooling platform used as basis for Company Carpool and other customized enterprise solutions.
 ---
 {% include JB/setup %}
 <div id="home-jumbotron" class="jumbotron">
@@ -49,6 +52,8 @@ products:
   </div>
 </div>
 <div class="container home-container">
+
+  <!-- Products -->
   <div class="row">
     <div class="col-lg-12">
       <h2 class="text-center home-title">Our products</h2>
@@ -61,23 +66,28 @@ products:
       </div>
       <div class="col-sm-7">
         <h3>{{product.title}}</h3>
-        <p class="lead">
+        <p>
           {{product.description}}
-          <br>
+        </p>
+        <p>
           <i class="icon-globe"></i> <a href="http://{{product.url}}">{{product.url}}</a>
+          {% if product.github %}
+            <br>
+            <i class="icon-github"></i> <a href="http://github.com/{{product.github}}">{{product.github}}</a>
+          {% endif %}
         </p>
       </div>
     </div>
   {% endfor %}
+
+  <!-- Technologies -->
   <div class="row">
     <div class="col-lg-12">
       <h2 class="text-center home-title">Technologies</h2>
-      <p>Each product requires careful decision making. These are the technologies we prefer:</p>
-      <ul class="icons-ul">
+      <ul class="nav nav-justified">
       {% for technology in page.technologies_list %}
         <li>
-          <i class="icon-li icon-ok"></i>
-          <a href="{{technology.url}}">{{technology.name}}</a>
+          <a href="{{technology.url}}"><img class="img-technology" alt="{{technology.title}}" src="{{technology.image}}"/></a>
         </li>
       {% endfor %}
       </ul>

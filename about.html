@@ -3,30 +3,48 @@ layout: page
 title: About
 header: About
 group: navigation
+members:
+  -
+    name: Cesidio Di Landa
+    role: Founder
+    image: http://placehold.it/64x64
+    twitter: cesid
+    contacts:
+      -
+        icon: linkedin
+        username: cesidiodl
+        url: http://www.linkedin.com/in/cesidiodl
+      -
+        icon: twitter
+        username: "@cesid"
+        url: http://twitter.com/cesid
+    linkedin: cesidiodl
+  -
+    name: Geremia Taglialatela
+    role: Co-Founder
+    image: http://placehold.it/64x64
+    contacts:
+      -
+        icon: twitter
+        username: "@gtagliala"
+        url: http://twitter.com/gtagliala
 ---
 {% include JB/setup %}
 <div class="row">
-  <div class="col-sm-6">
-    <div class="media">
-      <a class="pull-left" href="#">
-        <img class="media-object" src="http://placehold.it/64x64">
-      </a>
-      <div class="media-body">
-        <h4 class="media-heading">Cesidio Di Landa</h4>
-        <i class="icon-twitter"></i>
-        <i class="icon-linkedin"></i>
+  {% for member in page.members %}
+    <div class="col-lg-12">
+      <div class="media">
+        <a class="pull-left" href="#">
+          <img class="media-object" src="{{member.image}}">
+        </a>
+        <div class="media-body">
+          <h3 class="media-heading">{{member.name}}</h3>
+          {% for contact in member.contacts %}
+            <a href="{{contact.url}}"><i class="icon-{{contact.icon}}"></i> {{contact.username}}</a>
+            <br>
+          {% endfor %}
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="media">
-      <a class="pull-left" href="#">
-        <img class="media-object" src="http://placehold.it/64x64">
-      </a>
-      <div class="media-body">
-        <h4 class="media-heading">Geremia Taglialatela</h4>
-        <i class="icon-twitter"></i>
-      </div>
-    </div>
-  </div>
+  {% endfor %}
 </div>
