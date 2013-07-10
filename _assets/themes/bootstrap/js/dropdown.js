@@ -92,7 +92,7 @@
 
   function clearMenus() {
     $(backdrop).remove()
-    $(toggle).each(function (e) { 
+    $(toggle).each(function (e) {
       var $parent = getParent($(this))
       if (!$parent.hasClass('open')) return
       $parent.trigger(e = $.Event('hide.bs.dropdown'))
