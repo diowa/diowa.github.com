@@ -1,6 +1,6 @@
 {% if post.title %}
   <article>
     <h3><a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a></h3>
-    <div class="content"><a class="excerpt-link" href="{{ root_url }}{{ post.url }}">{{ content | split:"<!--more-->" | first }}</a></div>
+    <div class="content"><a class="excerpt-link" href="{{ root_url }}{{ post.url }}">{{ post.excerpt }}</a></div>
   </article>
 {% endif %}

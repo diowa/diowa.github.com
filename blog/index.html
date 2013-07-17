@@ -10,9 +10,14 @@ title: Blog
       <div class="page-header">
         <h1>{{ page.title }} {% if page.tagline %} <small>{{ page.tagline }}</small>{% endif %}</h1>
       </div>
-      {% assign post = site.posts.first %}
-      {% assign content = post.content %}
-      {% include themes/bootstrap/post_detail.html %}
+      {% for post in paginator.posts %}
+        <article>
+          <h3><a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a></h3>
+          <div class="content"><a class="excerpt-link" href="{{ root_url }}{{ post.url }}"><p>{{ post.content | postmorefilter | strip_html }} &hellip;</p></a></div>
+        </article>
+      {% endfor %}
+
+      {% include themes/bootstrap/pagination.html %}
       {% include themes/bootstrap/blog_navigation.html %}
     </div>
   </div>

@@ -4,6 +4,8 @@ permalink: /blog/:categories/:year/:month/:day/:title
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 pygments: true
+paginate: 5
+paginate_path: "/blog/page:num"
 
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
@@ -84,9 +86,8 @@ JB :
   # These paths are to the main pages Jekyll-Bootstrap ships with.
   # Some JB helpers refer to these paths; change them here if needed.
   #
-  archive_path: /archive.html
-  categories_path : /categories.html
-  portfolio_path : /portfolio.html
+  archive_path: /blog/archive.html
+  categories_path : /blog/categories.html
   tags_path : /tags.html
   atom_path : /atom.xml
   rss_path : /rss.xml
@@ -96,9 +97,9 @@ JB :
   # Set 'provider' to false to turn commenting off globally.
   #
   comments :
-    provider : false
+    provider : disqus
     disqus :
-      short_name : jekyllbootstrap
+      short_name : diowa
     livefyre :
       site_id : 123
     intensedebate :

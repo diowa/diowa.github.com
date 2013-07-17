@@ -5,6 +5,8 @@ gem 'rake'
 gem 'jekyll'
 gem 'jekyll-asset-pipeline', github: 'matthodan/jekyll-asset-pipeline'
 
+gem 'maruku', github: 'bhollis/maruku'
+
 gem 'less'
 gem 'therubyracer'
 

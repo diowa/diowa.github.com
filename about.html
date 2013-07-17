@@ -39,10 +39,13 @@ members:
         </a>
         <div class="media-body">
           <h3 class="media-heading">{{member.name}}</h3>
+          <ul class="icons-ul">
           {% for contact in member.contacts %}
-            <a href="{{contact.url}}"><i class="icon-{{contact.icon}}"></i> {{contact.username}}</a>
+            <li>
+              <i class="icon-li icon-{{contact.icon}}"></i><a href="{{contact.url}}">{{contact.username}}</a>
             <br>
           {% endfor %}
+          </ul>
         </div>
       </div>
     </div>
