@@ -42,7 +42,7 @@ authors:
 # Else if you are pushing to username.github.com, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://diowa.github.com
+production_url : http://diowa.com
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -117,14 +117,14 @@ JB :
   analytics :
     provider : google
     google :
-        tracking_id : 'UA-39283101-1'
+      tracking_id : 'UA-39283101-1'
     getclicky :
       site_id :
     mixpanel :
-        token : '_MIXPANEL_TOKEN_'
+      token : '_MIXPANEL_TOKEN_'
     piwik :
-        baseURL : 'myserver.tld/piwik' # Piwik installation address (without protocol)
-        idsite : '1'                   # the id of the site on Piwik
+      baseURL : 'myserver.tld/piwik' # Piwik installation address (without protocol)
+      idsite : '1'                   # the id of the site on Piwik
 
   # Settings for sharing helper.
   # Sharing is for things like tweet, plusone, like, reddit buttons etc.
