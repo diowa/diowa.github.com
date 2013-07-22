@@ -88,7 +88,7 @@ JB :
   #
   archive_path: /blog/archive.html
   categories_path : /blog/categories.html
-  tags_path : /tags.html
+  tags_path : /blog/tags.html
   atom_path : /atom.xml
   rss_path : /rss.xml
 
