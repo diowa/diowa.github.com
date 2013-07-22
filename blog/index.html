@@ -13,6 +13,10 @@ title: Blog
       {% for post in paginator.posts %}
         <article>
           <h3><a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a></h3>
+          <p class="text-muted">
+            Posted by <b>{{site.authors[post.author].name}}</b>
+            on <b>{{ post.date | date_to_long_string }}</b>
+          </p>
           <div class="content"><a class="excerpt-link" href="{{ root_url }}{{ post.url }}"><p>{{ post.content | postmorefilter | strip_html }} &hellip;</p></a></div>
         </article>
       {% endfor %}

@@ -4,7 +4,7 @@ layout: post
 categories : [Open Source]
 tagline: ''
 tags : [ruby2, rails4, twitter bootstrap, heroku]
-author: cesidio
+author: tagliala
 ---
 {% include JB/setup %}
 
