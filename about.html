@@ -7,7 +7,6 @@ members:
   -
     name: Cesidio Di Landa
     role: Founder
-    image: http://placehold.it/64x64
     twitter: cesid
     contacts:
       -
@@ -18,31 +17,40 @@ members:
         icon: twitter
         username: "@cesid"
         url: http://twitter.com/cesid
+      -
+        icon: github
+        username: cesidio
+        url: http://github.com/cesidio
     linkedin: cesidiodl
   -
     name: Geremia Taglialatela
     role: Co-Founder
-    image: http://placehold.it/64x64
     contacts:
       -
         icon: twitter
         username: "@gtagliala"
         url: http://twitter.com/gtagliala
+      -
+        icon: github
+        username: tagliala
+        url: http://github.com/tagliala
 ---
 {% include JB/setup %}
 <div class="row">
   {% for member in page.members %}
-    <div class="col-lg-12">
+    <div class="col-sm-6">
       <div class="media">
-        <a class="pull-left" href="#">
-          <img class="media-object" src="{{member.image}}">
-        </a>
+        {% if member.image %}
+          <a class="pull-left" href="#">
+            <img class="media-object" src="{{member.image}}">
+          </a>
+        {% endif %}
         <div class="media-body">
-          <h3 class="media-heading">{{member.name}}</h3>
-          <ul class="icons-ul">
+          <h3 class="media-heading">{{member.name}} <small>{{member.role}}</small></h3>
+          <ul class="list-inline">
           {% for contact in member.contacts %}
             <li>
-              <i class="icon-li icon-{{contact.icon}}"></i><a href="{{contact.url}}">{{contact.username}}</a>
+              <i class="icon-{{contact.icon}}"></i> <a href="{{contact.url}}">{{contact.username}}</a>
             <br>
           {% endfor %}
           </ul>
