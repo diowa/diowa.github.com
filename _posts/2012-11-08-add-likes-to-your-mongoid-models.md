@@ -20,6 +20,7 @@ add the gem to your `Gemfile`
 gem 'mongoid-likeable'
 {% endhighlight %}
 
+
 ### Usage
 
 Include the `Mongoid::Likeable` module to the models you want to like.

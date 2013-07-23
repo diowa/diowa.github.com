@@ -16,6 +16,7 @@ Nowadays deployment is pretty much automated while development still happens on 
 
 Nitrous.IO tries to fix that and gives you the ability to do web development inside a browser from any computer connected to the Internet. In this blog post I will show how to set up a Nitrous.IO box to work on [Ruby2 Rails4 Bootstrap Heroku Starter App](https://github.com/diowa/ruby2-rails4-bootstrap-heroku).
 
+
 ### 1. Create a box
 
 The first thing to do is to [create a box on Nitrous.IO](https://www.nitrous.io/join/rAkwYY7Gqog) (note: this is a referral link. [This one is a link without referral](https://www.nitrous.io/join)). You need at least 190 N2O to get 512MB of memory (the minimum amount of memory required to run our starter app). When you sign up at Nitrous.IO you get 150 N2O. To get extra N2O you can either pay or [link your social accounts and invite colleagues to try the service](https://www.nitrous.io/app#/n2o/bonus).
@@ -30,6 +31,7 @@ Now you have to follow these steps:
 
 
 ### 3. Set up databases
+
 [Create two free dev plan databases with Heroku Postgres](https://postgres.heroku.com/), one for development and one for testing.
 
 The Rails4 starter app we are going to use has a [database.yml](https://github.com/diowa/ruby2-rails4-bootstrap-heroku/blob/master/config/database.yml) file configured to work on Nitrous.IO, TravisCI and a local machine (comments and pull requests are welcome).
@@ -49,6 +51,7 @@ export STARTER_APP_TEST_DB_PASSWORD=YOUR_TEST_DB_PASSWORD
 export STARTER_APP_TEST_DB_HOST=YOUR_TEST_DB_HOST
 export STARTER_APP_TEST_DB_PORT=YOUR_TEST_DB_PORT
 {% endhighlight %}
+
 
 ### 4. Clone the starter app
 
@@ -70,12 +73,14 @@ Start the server and check that everything works from the Preview menu item (def
 rails s
 {% endhighlight %}
 
+
 ### 5. Deploy on Heroku
 
 {% highlight bash %}
 heroku create
 git push heroku master
 {% endhighlight %}
+
 
 ### 6. Considerations
 
