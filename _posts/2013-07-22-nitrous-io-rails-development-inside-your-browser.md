@@ -82,6 +82,6 @@ git push heroku master
 {% endhighlight %}
 
 
-### 6. Considerations
+### Considerations
 
-Being able to work on your projects without carrying your machine is a great freedom, but it comes at a price: the web ide is not that productive. Simple things like a global search and replace require you to master the command line. I certainly miss TextMate or something like GitX. A viable compromise is to install [Nitrous.IO for Mac](https://www.nitrous.io/mac) if you work on a Mac, so that you can just install your favorite text editor and git GUI.
+Being able to work on your projects without carrying your machine is a great freedom, but it comes at a price: the web ide is not that productive. Simple things like a global search and replace require you to master the command line. I certainly miss TextMate, [git-flow](http://nvie.com/posts/a-successful-git-branching-model/) or something like GitX. A viable compromise is to install [Nitrous.IO for Mac](https://www.nitrous.io/mac) if you work on a Mac, so that you can just install your favorite text editor and git GUI.
