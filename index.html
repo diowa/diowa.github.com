@@ -44,21 +44,13 @@ products:
 {% include JB/setup %}
 <div id="home-jumbotron" class="jumbotron">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <h1>Web Development Agency</h1>
-      </div>
-    </div>
+    <h1>Web Development Agency</h1>
   </div>
 </div>
 <div class="container home-container">
 
   <!-- Products -->
-  <div class="row">
-    <div class="col-lg-12">
-      <h2 class="text-center home-title">Our products</h2>
-    </div>
-  </div>
+  <h2 class="text-center home-title">Our products</h2>
   {% for product in page.products %}
     <div class="row row-product">
       <div class="col-sm-5">
@@ -82,16 +74,12 @@ products:
   {% endfor %}
 
   <!-- Technologies -->
-  <div class="row">
-    <div class="col-lg-12">
-      <h2 class="text-center home-title">Technologies</h2>
-      <ul class="nav nav-justified">
-      {% for technology in page.technologies_list %}
-        <li>
-          <a href="{{technology.url}}"><img class="img-technology" alt="{{technology.title}}" src="{{technology.image | asset_path}}"/></a>
-        </li>
-      {% endfor %}
-      </ul>
-    </div>
-  </div>
+  <h2 class="text-center home-title">Technologies</h2>
+  <ul class="nav nav-justified">
+  {% for technology in page.technologies_list %}
+    <li>
+      <a href="{{technology.url}}"><img class="img-technology" alt="{{technology.title}}" src="{{technology.image | asset_path}}"/></a>
+    </li>
+  {% endfor %}
+  </ul>
 </div>

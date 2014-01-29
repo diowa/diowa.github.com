@@ -1,8 +1,9 @@
 @import "twbs-variables.less";
-@import "_vendors/stylesheets/twbs/bootstrap/mixins";
+@import "_vendors/stylesheets/twbs/bootstrap/mixins.less";
 
 .navbar-brand {
   padding: 14px 15px;
+
   img {
     height: 32px;
   }
@@ -21,6 +22,18 @@
   }
 }
 
+@media(min-width: @screen-sm-min) {
+  .navbar {
+    .navbar-nav {
+      > li > a {
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+/*
 @media(min-width: @grid-float-breakpoint) {
   .navbar {
     .navbar-nav {
@@ -44,8 +57,10 @@
     }
   }
 }
+*/
 
 /* Temporary fix for navbar collapse */
+/*
 @grid-float-breakpoint-min: @grid-float-breakpoint - 1;
 @media screen and (max-width: @grid-float-breakpoint-min) {
   .nav-collapse {
@@ -89,3 +104,4 @@
     }
   }
 }
+*/
