@@ -6,39 +6,39 @@ technologies_list:
   -
     title: Ruby on Rails
     url: http://rubyonrails.org/
-    image: /assets/images/Ruby-on-Rails.png
+    image: Ruby-on-Rails.png
   -
     title: CoffeeScript
     url: http://coffeescript.org/
-    image: /assets/images/CoffeeScript.png
+    image: CoffeeScript.png
   -
     title: Bootstrap
     url: http://twitter.github.com/bootstrap/
-    image: /assets/images/Bootstrap.png
+    image: Bootstrap.png
   -
     title: MongoDB
     url: http://www.mongodb.org
-    image: /assets/images/MongoDB.png
+    image: MongoDB.png
   -
     title: PostgreSQL
     url: http://www.postgresql.org/
-    image: /assets/images/PostgreSQL.png
+    image: PostgreSQL.png
 products:
   -
     title: Company Carpool
     url: www.companycarpool.com
-    image: /assets/images/companycarpool.jpg
+    image: companycarpool.jpg
     description: A solution for companies and organizations interested in providing carpooling to their employees.
   -
     title: Minstrels
     url: beta.minstrels.com
-    image: /assets/images/minstrels.jpg
+    image: minstrels.jpg
     description: Minstrels is a social network designed for travelers. Members share travel stories, meet fellow travelers and ask for or offer hospitality.
   -
     title: icare
     url: icare.diowa.com
     github: diowa/icare
-    image: /assets/images/icare.jpg
+    image: icare.jpg
     description: icare is an open source carpooling platform used as basis for Company Carpool and other customized enterprise solutions.
 ---
 {% include JB/setup %}
@@ -63,7 +63,7 @@ products:
     <div class="row row-product">
       <div class="col-sm-5">
         <!-- 1060 x 876 -->
-        <a href="http://{{product.url}}" class="thumbnail thumbnail-product"><img class="img-responsive" src="{{product.image}}"/></a>
+        <a href="http://{{product.url}}" class="thumbnail thumbnail-product"><img class="img-responsive" src="{{product.image | asset_path }}"/></a>
       </div>
       <div class="col-sm-7">
         <h3>{{product.title}}</h3>
@@ -71,10 +71,10 @@ products:
           {{product.description}}
         </p>
         <p>
-          <i class="icon-globe"></i> <a href="http://{{product.url}}">{{product.url}}</a>
+          <i class="fa fa-globe"></i> <a href="http://{{product.url}}">{{product.url}}</a>
           {% if product.github %}
             <br>
-            <i class="icon-github"></i> <a href="http://github.com/{{product.github}}">{{product.github}}</a>
+            <i class="fa fa-github"></i> <a href="http://github.com/{{product.github}}">{{product.github}}</a>
           {% endif %}
         </p>
       </div>
@@ -88,7 +88,7 @@ products:
       <ul class="nav nav-justified">
       {% for technology in page.technologies_list %}
         <li>
-          <a href="{{technology.url}}"><img class="img-technology" alt="{{technology.title}}" src="{{technology.image}}"/></a>
+          <a href="{{technology.url}}"><img class="img-technology" alt="{{technology.title}}" src="{{technology.image | asset_path}}"/></a>
         </li>
       {% endfor %}
       </ul>
