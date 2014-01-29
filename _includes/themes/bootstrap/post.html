@@ -14,14 +14,14 @@
   <hr>
 
 {% unless page.categories == empty %}
-  <ul class="list-inline unstyled">
+  <ul class="list-inline">
     <li>Categories:</li>
     {% assign categories_list = page.categories %}
     {% include JB/categories_list %}
   </ul>
 {% endunless %}
 {% unless page.tags == empty %}
-  <ul class="list-inline unstyled">
+  <ul class="list-inline">
     <li>Tags:</li>
     {% assign tags_list = page.tags %}
     {% include JB/tags_list %}
@@ -31,13 +31,13 @@
   {% if page.previous %}
     <li class="previous"><a href="{{ BASE_PATH }}{{ page.previous.url }}" title="{{ page.previous.title }}">&larr; Previous</a></li>
   {% else %}
-    <li class="previous disabled"><a><i class="fa fa-long-arrow-left"></i> Previous</a></li>
+    <li class="previous disabled"><a><span class="fa fa-long-arrow-left"></span> Previous</a></li>
   {% endif %}
     <!--<li><a href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Archive</a></li>-->
   {% if page.next %}
     <li class="next"><a href="{{ BASE_PATH }}{{ page.next.url }}" title="{{ page.next.title }}">Next &rarr;</a></li>
   {% else %}
-    <li class="next disabled"><a>Next <i class="fa fa-long-arrow-right"></i></a>
+    <li class="next disabled"><a>Next <span class="fa fa-long-arrow-right"></span></a>
   {% endif %}
   </ul>
   {% include themes/bootstrap/blog_navigation.html %}

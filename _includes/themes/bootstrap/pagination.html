@@ -4,14 +4,14 @@
       {% if paginator.previous_page %}
         <li>
           {% if paginator.previous_page == 1 %}
-            <a href="/blog"><i class="fa fa-long-arrow-left"></i> Previous</a>
+            <a href="/blog"><span class="fa fa-long-arrow-left"></span> Previous</a>
           {% else %}
-            <a href="{{ paginator.previous_page_path }}"><i class="fa fa-long-arrow-left"></i> Previous</a>
+            <a href="{{ paginator.previous_page_path }}"><span class="fa fa-long-arrow-left"></span> Previous</a>
           {% endif %}
         </li>
       {% else %}
         <li class="disabled">
-          <a href="#"><i class="fa fa-long-arrow-left"></i> Previous</a>
+          <a href="#"><span class="fa fa-long-arrow-left"></span> Previous</a>
         </li>
       {% endif %}
 
@@ -39,11 +39,11 @@
 
       {% if paginator.next_page %}
         <li>
-          <a href="{{ paginator.next_page_path }}">Next <i class="fa fa-long-arrow-right"></i></a>
+          <a href="{{ paginator.next_page_path }}">Next <span class="fa fa-long-arrow-right"></span></a>
         </li>
       {% else %}
         <li class="disabled">
-          <a href="#">Next <i class="fa fa-long-arrow-right"></i></a>
+          <a href="#">Next <span class="fa fa-long-arrow-right"></span></a>
         </li>
       {% endif %}
     </ul>
