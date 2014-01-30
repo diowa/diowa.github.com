@@ -94,11 +94,22 @@ h2.home-title {
 .thumbnail-product {
   display: inline-block;
   max-width: 300px;
+  margin-top: 20px;
 }
 
 .img-technology {
   max-height: 40px;
   max-width: 100%;
+}
+
+.title-technology {
+  font-size: 14px;
+}
+
+@media(min-width: @screen-sm-min) {
+  .title-technology {
+    display: none;
+  }
 }
 
 @media(min-width: @screen-md-min) {

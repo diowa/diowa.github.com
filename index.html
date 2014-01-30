@@ -82,7 +82,10 @@ products:
   <ul class="nav nav-justified">
   {% for technology in page.technologies_list %}
     <li>
-      <a href="{{technology.url}}"><img class="img-technology" alt="{{technology.title}}" src="{{technology.image | asset_path}}"/></a>
+      <a href="{{technology.url}}">
+        <img class="img-technology" alt="{{technology.title}}" src="{{technology.image | asset_path}}"/>
+        <span class="title-technology">{{technology.title}}</span>
+      </a>
     </li>
   {% endfor %}
   </ul>
