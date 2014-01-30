@@ -68,10 +68,10 @@ h1 {
 }
 
 // Animations
+.btn,
 .nav > li > a {
   .transition(background-color .15s ease-in-out);
 }
-
 
 @media(min-width: @grid-float-breakpoint) {
   .nav-blog {
@@ -82,6 +82,27 @@ h1 {
       & > a {
         text-transform: uppercase;
         font-weight: 700;
+      }
+    }
+  }
+
+  .navbar-nav {
+    > li {
+      height: @navbar-height;
+      overflow: hidden;
+
+      > a {
+        .transition(all .15s ease-in-out);
+
+        &.active,
+        &:hover {
+          height: @navbar-height;
+          border-bottom: 4px solid @navbar-default-link-hover-color;
+        }
+
+        &.active {
+          border-bottom-color: @navbar-default-link-color;
+        }
       }
     }
   }
