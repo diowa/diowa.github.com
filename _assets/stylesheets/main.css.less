@@ -1,8 +1,41 @@
 @import "twbs-variables.less";
 @import "_vendors/stylesheets/twbs/bootstrap/mixins.less";
 
-h1 {
-  text-transform: uppercase;
+article {
+  h1, .h1 { font-size: ceil(@font-size-base * 3.25); }
+  h2, .h2 { font-size: ceil(@font-size-base * 2.70); } // ~38px
+  h3, .h3 { font-size: ceil(@font-size-base * 2.25); } // ~32px
+  h4, .h4 { font-size: ceil(@font-size-base * 1.70); } // ~24px
+  h5, .h5 { font-size: ceil(@font-size-base * 1.25); } // ~18px
+  h6, .h6 { font-size: @font-size-base; } // ~14px
+
+  .content {
+    font-size: 1.25em;
+    line-height: 1.70;
+
+    p, pre, ul, ol {
+      margin-bottom: 1.25em;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: @font-family-base;
+      margin-top: 40px;
+    }
+
+    h1, h2, h3 {
+      letter-spacing: -1px;
+    }
+
+    pre code {
+      font-size: @font-size-base;
+    }
+  }
+
+  & + article {
+    margin-top: 2.5em;
+    border-top: 1px solid @hr-border;
+    padding-top: 1.25em;
+  }
 }
 
 footer {
@@ -16,29 +49,8 @@ footer {
   }
 }
 
-article {
-  h1, .h1 { font-size: ceil(@font-size-base * 3.25); }
-  h2, .h2 { font-size: ceil(@font-size-base * 2.70); } // ~38px
-  h3, .h3 { font-size: ceil(@font-size-base * 2.25); } // ~32px
-  h4, .h4 { font-size: ceil(@font-size-base * 1.70); } // ~24px
-  h5, .h5 { font-size: ceil(@font-size-base * 1.25); } // ~18px
-  h6, .h6 { font-size: @font-size-base; } // ~14px
-
-  .content {
-    font-size: 1.25em;
-    line-height: 1.70;
-
-    p, pre, ul, ol { margin-bottom: 1.25em; }
-
-    h1, h2, h3, h4, h5, h6 { font-family: @font-family-base; }
-    pre code { font-size: @font-size-base; }
-  }
-
-  & + article {
-    margin-top: 2.5em;
-    border-top: 1px solid @hr-border;
-    padding-top: 1.25em;
-  }
+h1 {
+  text-transform: uppercase;
 }
 
 .diowa-logo {
@@ -53,15 +65,18 @@ article {
 .page-header {
   border-bottom: 0;
   margin-top: 20px;
-
-  h1 {
-    margin-top: 0;
-  }
 }
+
+// Animations
+.nav > li > a {
+  .transition(background-color .15s ease-in-out);
+}
+
 
 @media(min-width: @grid-float-breakpoint) {
   .nav-blog {
     margin: 40px 0 20px;
+    background: lighten(@gray-lighter, 5%);
 
     li {
       & > a {
