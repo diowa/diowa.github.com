@@ -8,6 +8,7 @@ members:
     name: Cesidio Di Landa
     role: Founder
     twitter: cesid
+    image: cesidiodilanda.jpg
     contacts:
       -
         icon: linkedin
@@ -25,6 +26,7 @@ members:
   -
     name: Geremia Taglialatela
     role: Co-Founder
+    image: geremiataglialatela.jpg
     contacts:
       -
         icon: twitter
@@ -39,11 +41,11 @@ members:
 <div class="row">
   {% for member in page.members %}
     <div class="col-sm-6">
-      <div class="media">
+      <div class="media media-person">
         {% if member.image %}
-          <a class="pull-left" href="#">
-            <img class="media-object" src="{{member.image}}">
-          </a>
+          <div class="pull-left">
+            <img class="media-object" src="{{member.image | asset_path }}">
+          </div>
         {% endif %}
         <div class="media-body">
           <h3 class="media-heading">{{member.name}}</h3>

@@ -60,10 +60,28 @@ h1
   border-bottom: 0
   margin-top: 20px
 
+.media-person
+  margin-bottom: 20px
+
+  .pull-left
+    text-align: center
+    float: none !important
+
+  .media-object
+    @include square(128px)
+    display: inline-block
+    border-radius: 100px
+    margin-bottom: 20px
+
 // Animations
 .btn,
 .nav > li > a
   @include transition(background-color .15s ease-in-out)
+
+@media (min-width: #{$screen-xs})
+  .media-person
+    .pull-left
+      float: left !important
 
 @media (min-width: #{$grid-float-breakpoint})
   .nav-blog
