@@ -1,0 +1,102 @@
+@import "twbs-variables"
+@import "twbs/bootstrap/mixins"
+
+#home-jumbotron
+  margin-top: -20px
+  margin-bottom: 0
+  padding: 40px 20px
+  border-radius: 0
+  text-align: center
+  background-attachment: fixed
+  background-color: $flat-ui-wet-asphalt
+  background-image: url(data:image/png;base64,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)
+  background-position: center
+  @include box-shadow(inset 0 0 15px fade($black, 25%))
+
+  .lead
+    font-size: ceil($font-size-base * 1.25)
+
+  h1,
+  h2,
+  h3,
+  .head
+    margin: 0
+    line-height: 1
+    font-weight: 700
+    color: $white
+    text-transform: uppercase
+    letter-spacing: -1px
+
+  h1
+    display: inline-block
+    margin: 0 0 10px
+    padding: 0 0 10px
+    line-height: 1.1
+    font-size: ceil($font-size-base * 3.25)
+
+  h2
+    font-size: ceil($font-size-base * 1.70)
+    letter-spacing: 0
+
+  p.head
+    font-size: ceil($font-size-base * 2.70)
+
+@media (min-width: #{$grid-float-breakpoint})
+  #home-jumbotron
+    padding: 80px 20px
+
+@media (min-width: #{$screen-md-min})
+  #home-jumbotron
+    h1
+      font-size: ceil($font-size-base * 5.70)
+    h2
+      font-size: ceil($font-size-base * 3.25)
+
+.home-container
+  h1,
+  h2,
+  h3
+    text-transform: uppercase
+
+  h1
+    font-size: ceil($font-size-base * 3.70)
+  h2
+    font-size: ceil($font-size-base * 3.25)
+  h3
+    font-size: ceil($font-size-base * 2.70)
+
+  p,
+  a,
+  ul
+    font-size: 21px
+    line-height: 1.4
+
+h2.home-title
+  margin: 40px 0 20px
+  padding: 10px 0
+  font-size: 2.25em
+  color: #fff
+  background: $brand-primary
+
+.row-product + .row-product
+  margin-top: 40px
+
+.thumbnail-product
+  display: inline-block
+  max-width: 300px
+  margin-top: 20px
+
+.img-technology
+  max-height: 40px
+  max-width: 100%
+
+.title-technology
+  font-size: 14px
+
+@media (min-width: #{$screen-sm-min})
+  .title-technology
+    display: none
+
+@media (min-width: #{$screen-md-min})
+  .img-technology
+    max-height: 80px
