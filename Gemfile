@@ -6,5 +6,6 @@ gem 'rake'
 
 gem 'jekyll'
 gem 'jekyll-assets'
+gem 'jekyll-minify-html'
 
 gem 'maruku'
