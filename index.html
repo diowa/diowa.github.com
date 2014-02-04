@@ -2,7 +2,24 @@
 layout: default
 title: Web Development Agency
 tagline: Supporting tagline
-technologies_list:
+products:
+  -
+    title: Company Carpool
+    url: www.companycarpool.com
+    image: companycarpool.jpg
+    description: A solution for companies and organizations interested in providing carpooling to their employees.
+  -
+    title: Minstrels
+    url: beta.minstrels.com
+    image: minstrels.jpg
+    description: Minstrels is a social network designed for travelers. Members share travel stories, meet fellow travelers and ask for or offer hospitality.
+  -
+    title: icare
+    url: icare.diowa.com
+    github: diowa/icare
+    image: icare.jpg
+    description: icare is an open source carpooling platform used as basis for Company Carpool and other customized enterprise solutions.
+technologies:
   -
     title: Ruby on Rails
     url: http://rubyonrails.org/
@@ -27,23 +44,6 @@ technologies_list:
     title: Wordpress
     url: http://www.wordpress.org
     image: WordPress.png
-products:
-  -
-    title: Company Carpool
-    url: www.companycarpool.com
-    image: companycarpool.jpg
-    description: A solution for companies and organizations interested in providing carpooling to their employees.
-  -
-    title: Minstrels
-    url: beta.minstrels.com
-    image: minstrels.jpg
-    description: Minstrels is a social network designed for travelers. Members share travel stories, meet fellow travelers and ask for or offer hospitality.
-  -
-    title: icare
-    url: icare.diowa.com
-    github: diowa/icare
-    image: icare.jpg
-    description: icare is an open source carpooling platform used as basis for Company Carpool and other customized enterprise solutions.
 ---
 {% include JB/setup %}
 <div id="home-jumbotron" class="jumbotron">
@@ -80,7 +80,7 @@ products:
   <!-- Technologies -->
   <h2 class="text-center home-title">Technologies</h2>
   <ul class="nav nav-justified">
-  {% for technology in page.technologies_list %}
+  {% for technology in page.technologies %}
     <li>
       <a href="{{technology.url}}">
         <img class="img-technology" alt="{{technology.title}}" src="{{technology.image | asset_path}}"/>
