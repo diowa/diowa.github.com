@@ -17,9 +17,6 @@ I will go straight into the code because it is very simple and auto explicative.
 #### slideshow_image.rb
 {% highlight ruby %}
 class SlideshowImage < ActiveRecord::Base
-  include Concerns::Positionable
-
-  translates :title, :description_html
 
   IMAGE_VERSIONS = {
     slideshow: {
@@ -36,12 +33,6 @@ class SlideshowImage < ActiveRecord::Base
   }
   mount_uploader :image, ImageUploader
 
-  validates :image, presence: true
-  validates :title, presence: true
-
-  def to_s
-    title
-  end
 end
 {% endhighlight %}
 
@@ -130,4 +121,4 @@ The only thing I really don't like is:
 end
 {% endhighlight %}
 
-I'm wondering if there is a better way of doing this
+I'm wondering if there is a better way of doing this, suggestions are appreciated!
