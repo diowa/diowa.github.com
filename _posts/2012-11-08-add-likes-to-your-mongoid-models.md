@@ -5,6 +5,7 @@ categories : [Open Source, Rubygems]
 tagline: ''
 tags : [ruby, mongoid, open source]
 author: cesidio
+blog: true
 ---
 {% include JB/setup %}
 

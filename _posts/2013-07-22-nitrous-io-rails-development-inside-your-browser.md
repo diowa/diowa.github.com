@@ -5,6 +5,7 @@ categories : [Rails]
 tagline: ''
 tags : [rails, ruby, Nitrous.IO, web development]
 author: cesidio
+blog: true
 ---
 {% include JB/setup %}
 

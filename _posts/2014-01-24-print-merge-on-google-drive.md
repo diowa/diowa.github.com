@@ -5,6 +5,7 @@ categories : [Productivity]
 tagline: ''
 tags : [print merge, google drive, autocrat, invoices, google app scripts]
 author: tagliala
+blog: true
 ---
 {% include JB/setup %}
 

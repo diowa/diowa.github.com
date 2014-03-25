@@ -5,6 +5,7 @@ categories : [Rails]
 tagline: ''
 tags : [carrierwave, dynamic versions, custom processing]
 author: tagliala
+blog: true
 ---
 {% include JB/setup %}
 

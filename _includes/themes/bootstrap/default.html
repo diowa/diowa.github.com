@@ -10,7 +10,7 @@
 
     {% stylesheet application %}
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700|Oswald:300" rel="stylesheet" type="text/css" media="all">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700%7COswald:300" rel="stylesheet" type="text/css" media="all">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -39,7 +39,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-          {% if page.group == 'blog' %}
+          {% if page.blog %}
             <li class="active"><a href="/blog" class="active">Blog</a></li>
           {% else %}
             <li><a href="/blog">Blog</a></li>

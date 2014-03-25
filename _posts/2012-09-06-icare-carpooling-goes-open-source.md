@@ -5,6 +5,7 @@ categories : [Products]
 tagline: ''
 tags : [open source, carpooling, ride-sharing, lift-sharing, covoiturage, sharing economy]
 author: tagliala
+blog: true
 ---
 {% include JB/setup %}
 

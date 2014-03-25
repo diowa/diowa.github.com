@@ -5,6 +5,7 @@ categories : [Open Source]
 tagline: ''
 tags : [ruby2, rails4, twitter bootstrap, heroku]
 author: tagliala
+blog: true
 ---
 {% include JB/setup %}
 
