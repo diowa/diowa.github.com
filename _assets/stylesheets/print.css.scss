@@ -1,0 +1,34 @@
+@media print {
+  @page {
+    margin: 25mm;
+  }
+
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Garamond', serif;
+  }
+
+  article {
+    h1 { font-size: 1.802em; }
+    h2 { font-size: 1.602em; }
+    h3 { font-size: 1.424em; }
+    h4 { font-size: 1.266em; }
+    h5 { font-size: 1.125em; }
+    h6 { font-size: 1em; }
+
+    > .content {
+      text-align: justify;
+      font-size: 14px;
+      line-height: 1.5;
+
+      pre code {
+        font-size: 12px;
+      }
+    }
+  }
+}
