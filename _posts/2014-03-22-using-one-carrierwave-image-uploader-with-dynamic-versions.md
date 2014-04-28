@@ -1,19 +1,18 @@
 ---
 title: "Using one carrierwave image uploader with dynamic versions"
+description: How to manage models with different image versions with only one image uploader
 layout: post
 categories : [Rails]
 tagline: ''
-tags : [carrierwave, dynamic versions, custom processing]
+tags : [carrierwave, dynamic image versions, custom image processing]
 author: tagliala
 blog: true
 ---
 {% include JB/setup %}
 
-I was looking for a cleaner approach to manage models with different image versions. I came into [an awesome blog post](http://andreapavoni.com/blog/2012/3/using-one-carrierwave-image-uploader-with-different-sizes-on-several-models) by [Andrea Pavoni](http://andreapavoni.com/). I needed multiple, configurable processes so I extended that approach.
+I was looking for a cleaner approach to manage models with different image versions. I came into [this awesome blog post](http://andreapavoni.com/blog/2012/3/using-one-carrierwave-image-uploader-with-different-sizes-on-several-models) by [Andrea Pavoni](http://andreapavoni.com/). I needed multiple, configurable processes so I extended and updated his work.
 
 <!--more-->
-
-I will go straight into the code because it is very simple and auto explicative.
 
 #### slideshow_image.rb
 {% highlight ruby %}
