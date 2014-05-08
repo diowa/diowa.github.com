@@ -7,7 +7,4 @@ gem 'rake'
 gem 'jekyll'
 gem 'jekyll-assets'
 gem 'jekyll-minify-html'
-gem 'sass'
-gem 'coffee-script'
-
-gem 'maruku'
+gem 'jekyll-sitemap'

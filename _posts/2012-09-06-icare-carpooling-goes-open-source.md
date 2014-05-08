@@ -7,7 +7,7 @@ tags : [open source, carpooling, ride-sharing, lift-sharing, covoiturage, sharin
 author: tagliala
 blog: true
 ---
-{% include JB/setup %}
+{% include JB/setup.html %}
 
 We are passionate about the Sharing Economy and we are glad to present icare, an open source carpooling platform based on the technology stack of [Minstrels](http://beta.minstrels.com/).
 

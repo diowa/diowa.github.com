@@ -7,7 +7,7 @@ tags : [ruby2, rails4, twitter bootstrap, heroku]
 author: tagliala
 blog: true
 ---
-{% include JB/setup %}
+{% include JB/setup.html %}
 
 Rails 4 brings many cool new features like <a href="https://github.com/rails/turbolinks/">Turbolinks</a> and <a href="https://github.com/rails/strong_parameters">Strong Parameters</a>. We already used these gems and as soon as Rails 4 has been released we created a starter app that includes Twitter Bootstrap, Font Awesome and some other defaults like <a href="http://rspec.info">Rspec</a> and <a href="http://haml.info/">HAML</a>.
 

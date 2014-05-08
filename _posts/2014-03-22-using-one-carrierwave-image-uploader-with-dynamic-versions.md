@@ -8,7 +8,7 @@ tags : [carrierwave, dynamic image versions, custom image processing]
 author: tagliala
 blog: true
 ---
-{% include JB/setup %}
+{% include JB/setup.html %}
 
 I was looking for a cleaner approach to manage models with different image versions. I came into [this awesome blog post](http://andreapavoni.com/blog/2012/3/using-one-carrierwave-image-uploader-with-different-sizes-on-several-models) by [Andrea Pavoni](http://andreapavoni.com/). I needed multiple, configurable processes so I extended and updated his work.
 

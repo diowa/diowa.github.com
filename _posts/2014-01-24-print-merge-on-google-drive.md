@@ -7,7 +7,7 @@ tags : [print merge, google drive, autocrat, invoices, google app scripts]
 author: tagliala
 blog: true
 ---
-{% include JB/setup %}
+{% include JB/setup.html %}
 
 We were looking for a way to create simple invoices using a "print merge" approach that wouldn't require offline software. We wanted a solution on the cloud, free, compatible with Google Drive and possibly open source.
 

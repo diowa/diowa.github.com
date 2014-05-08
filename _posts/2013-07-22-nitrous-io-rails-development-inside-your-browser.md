@@ -7,7 +7,7 @@ tags : [rails, ruby, Nitrous.IO, web development]
 author: cesidio
 blog: true
 ---
-{% include JB/setup %}
+{% include JB/setup.html %}
 
 Years ago I was amused by Heroku giving the possibility to do development inside a web IDE. That product was called [Heroku Garden](http://web.archive.org/web/20090121092638/http://herokugarden.com/) but it was discontinued and Heroku focused only on easing the deployment of web apps.
 

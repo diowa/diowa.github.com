@@ -6,7 +6,7 @@ tagline: ''
 tags : [hospitality, meetings, travel stories, sharing economy]
 author: cesidio
 ---
-{% include JB/setup %}
+{% include JB/setup.html %}
 
 Test
 

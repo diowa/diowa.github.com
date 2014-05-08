@@ -17,14 +17,14 @@
   <ul class="list-inline">
     <li>Categories:</li>
     {% assign categories_list = page.categories %}
-    {% include JB/categories_list %}
+    {% include JB/categories_list.html %}
   </ul>
 {% endunless %}
 {% unless page.tags == empty %}
   <ul class="list-inline">
     <li>Tags:</li>
     {% assign tags_list = page.tags %}
-    {% include JB/tags_list %}
+    {% include JB/tags_list.html %}
   </ul>
 {% endunless %}
   <ul class="pager hidden-print">
@@ -41,5 +41,5 @@
   {% endif %}
   </ul>
   {% include themes/bootstrap/blog_navigation.html %}
-  {% include JB/comments %}
+  {% include JB/comments.html %}
 </div>

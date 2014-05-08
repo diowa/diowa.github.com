@@ -7,7 +7,7 @@ tags : [ruby, mongoid, open source]
 author: cesidio
 blog: true
 ---
-{% include JB/setup %}
+{% include JB/setup.html %}
 
 We needed a way to add likes to stories for <a href="http://beta.minstrels.com">Minstrels</a>. We started looking for gems that provide this functionality and we found <a href="http://github.com/tombell/mongoid-voteable">tombell/mongoid-voteable</a>, that does a little more by providing a voting system to mongoid models. So we decided to fork this gem and focus only on likes. Today we gave it back to the open source community.
 
