@@ -4,7 +4,7 @@
 <meta content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}" property="og:description">
 
 {% if page.url %}
-<meta content="{{ site.production_url }}{{ page.url }}" property="og:url">
+<meta content="{{ page.url | replace:'index.html','' | prepend: site.production_url }}" property="og:url">
 {% endif %}
 
 {% if page.date %}
@@ -16,9 +16,9 @@
 {% endif %}
 
 {% if page.image %}
-<meta content="{{ site.production_url }}{{ page.image | asset_path }}" property="og:image">
+<meta content="{{ page.image | asset_path | prepend: site.production_url }}" property="og:image">
 {% else %}
-<meta content="{{ site.production_url }}{{ 'diowa-open-graph.png' | asset_path }}" property="og:image">
+<meta content="{{ 'diowa-open-graph.jpg' | asset_path | prepend: site.production_url }}" property="og:image">
 {% endif %}
 
 {% if page.categories %}

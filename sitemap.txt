@@ -3,6 +3,6 @@
 title : Sitemap
 ---
 {% for page in site.pages %}
-{{site.production_url}}{{ page.url }}{% endfor %}
+{{ page.url | prepend: site.production_url }}{% endfor %}
 {% for post in site.posts %}
-{{site.production_url}}{{ post.url }}{% endfor %}
+{{ post.url | prepend: site.production_url }}{% endfor %}
