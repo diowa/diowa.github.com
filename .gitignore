@@ -11,3 +11,4 @@ Thumbs.db
 
 # Jekyll Assets Pipeline
 .asset_pipeline
+.sass-cache
