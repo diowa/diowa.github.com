@@ -1,16 +1,6 @@
 @import "twbs-variables";
 @import "twbs/bootstrap/mixins";
 
-footer {
-  margin-top: 20px;
-  border-top: 1px solid $hr-border;
-  padding: 20px 0;
-  color: $gray-light;
-  li > a.active {
-    color: $text-color;
-  }
-}
-
 h1 {
   text-transform: uppercase;
 }

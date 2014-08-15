@@ -1,0 +1,26 @@
+@import "twbs-variables";
+@import "twbs/bootstrap/mixins";
+
+html,
+footer {
+  background-color: #f0f0f0;
+}
+
+footer {
+  margin-top: 60px;
+  color: $gray-light;
+  box-shadow: 0 1px 1px 0 fade-out(black, .85) inset;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.footer-logo {
+  display: block;
+  margin: -52px auto 20px;
+}
+
+.footer-wrapper {
+  padding: 20px 0 40px;
+}

@@ -1,18 +1,21 @@
 <footer>
-  <div class="container">
-    <ul class="list-inline pull-right">
-      {% if page.group == 'blog' %}
-        <li class="active"><a href="/blog" class="active">Blog</a></li>
-      {% else %}
-        <li><a href="/blog">Blog</a></li>
-      {% endif %}
-      {% assign pages_list = site.pages | sort:"name" %}
-      {% assign group = 'navigation' %}
-      {% include JB/pages_list.html %}
-    </ul>
-    <ul class="list-inline">
-      <li>&copy; diowa 2014</li>
-    </ul>
+  <div class="footer-wrapper">
+    <img src="{{'diowa-footer.png' | asset_path }}" width="56" height="64" alt="diowa" class="footer-logo">
+    <div class="container">
+      <ul class="list-inline pull-right">
+        {% if page.group == 'blog' %}
+          <li class="active"><a href="/blog" class="active">Blog</a></li>
+        {% else %}
+          <li><a href="/blog">Blog</a></li>
+        {% endif %}
+        {% assign pages_list = site.pages | sort:"name" %}
+        {% assign group = 'navigation' %}
+        {% include JB/pages_list.html %}
+      </ul>
+      <ul class="list-inline">
+        <li>&copy; diowa 2014</li>
+      </ul>
+    </div>
   </div>
 </footer>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
