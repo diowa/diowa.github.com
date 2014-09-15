@@ -1,5 +1,6 @@
 ---
 title: "Nitrous.IO: Rails development inside your browser"
+description: "Nitrous.IO: Rails development inside your browser"
 layout: post
 categories : [Rails]
 tagline: ''

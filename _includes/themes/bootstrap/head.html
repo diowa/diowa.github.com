@@ -1,6 +1,6 @@
 <head>
   <meta charset="utf-8">
-  <title>{% if page.title %}{{ page.title }}{% else %}{{ site.name }}{% endif %}</title>
+  <title>{% if page.title %}{{ page.title }}{% if paginator.page > 1 %}{{ paginator.page | prepend: ' | Page ' }}{% endif %}{% else %}{{ site.name }}{% endif %}</title>
 
   {% if page.description %}
     <meta name="description" content="{{ page.description }}">

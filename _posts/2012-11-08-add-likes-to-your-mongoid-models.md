@@ -1,5 +1,6 @@
 ---
 title: Add likes to your Mongoid models
+description: "mongoid-likeable is a gem to add likes to your Mongoid models"
 layout: post
 categories : [Open Source, Rubygems]
 tagline: ''

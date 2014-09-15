@@ -1,5 +1,6 @@
 ---
 title: "Ruby2 Rails4 Bootstrap Heroku"
+description: "Ruby 2 Rails 4 Bootstrap starter application, deployable on Heroku"
 layout: post
 categories : [Open Source]
 tagline: ''

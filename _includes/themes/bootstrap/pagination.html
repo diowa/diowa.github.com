@@ -4,7 +4,7 @@
       {% if paginator.previous_page %}
         <li>
           {% if paginator.previous_page == 1 %}
-            <a href="/blog"><span class="fa fa-long-arrow-left"></span> Previous</a>
+            <a href="/blog/"><span class="fa fa-long-arrow-left"></span> Previous</a>
           {% else %}
             <a href="{{ paginator.previous_page_path }}"><span class="fa fa-long-arrow-left"></span> Previous</a>
           {% endif %}
@@ -21,7 +21,7 @@
         </li>
       {% else %}
         <li>
-          <a href="/blog">1</a>
+          <a href="/blog/">1</a>
         </li>
       {% endif %}
 
@@ -32,7 +32,7 @@
           </li>
         {% else %}
           <li>
-            <a href="/blog/page{{count}}">{{count}}</a>
+            <a href="/blog/page{{count}}/">{{count}}</a>
           </li>
         {% endif %}
       {% endfor %}

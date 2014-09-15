@@ -4,9 +4,9 @@
     <div class="container">
       <ul class="list-inline pull-right">
         {% if page.group == 'blog' %}
-          <li class="active"><a href="/blog" class="active">Blog</a></li>
+          <li class="active"><a href="/blog/" class="active">Blog</a></li>
         {% else %}
-          <li><a href="/blog">Blog</a></li>
+          <li><a href="/blog/">Blog</a></li>
         {% endif %}
         {% assign pages_list = site.pages | sort:"name" %}
         {% assign group = 'navigation' %}

@@ -1,5 +1,6 @@
 ---
 title: "icare: carpooling goes open source"
+description: "icare is an open source carpooling platform"
 layout: post
 categories : [Products]
 tagline: ''
