@@ -14,23 +14,48 @@ I was looking for a cleaner approach to manage models with different image versi
 
 <!--more-->
 
-#### slideshow_image.rb
-{% highlight ruby %}
-class SlideshowImage < ActiveRecord::Base
+### Update! October, 9th 2014
+Improved the code with an initializer. In this way we will not pollute models with image versions, we can use the same versions for multiple models but there is a little bit of separation.
 
-  IMAGE_VERSIONS = {
-    slideshow: {
+We also improved the image uploader in order to provide progressive jpegs.
+
+
+#### image_versions_.rb (initializer)
+{% highlight ruby %}
+# better to always have a thumbnail version because it is used by Rails Admin
+
+APP_IMAGE_VERSIONS = {
+  asset: {
+    fill_1200x518: {
       resize_to_fill: [1200, 518],
       quality: 75
-    },
-    thumbnail: {
-      resize_to_fill: [400, 172]
     },
     black_and_white: {
       resize_to_limit: [200, 200],
       desaturate: nil
+    },
+    thumbnail: {
+      resize_to_fill: [400, 172]
+    }
+  },
+  gallery: {
+    fill_800x600: {
+      resize_to_fill: [800, 600]
+    },
+    thumbnail: {
+      resize_to_fit: [300, 300]
     }
   }
+}
+
+APP_ALL_IMAGE_VERSIONS = APP_IMAGE_VERSIONS.map{ |k,v| v.keys }.flatten.uniq
+{% endhighlight %}
+
+#### slideshow_image.rb
+{% highlight ruby %}
+class SlideshowImage < ActiveRecord::Base
+
+  IMAGE_VERSIONS = APP_IMAGE_VERSIONS[:asset]
   mount_uploader :image, ImageUploader
 
 end
@@ -49,13 +74,13 @@ class ImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  process quality: 85
   process resize_to_limit: [2048, 2048]
+  process :optimize
 
-  # better to always have a thumbnail version because it is used by Rails Admin
-  %i(slideshow thumbnail black_and_white).each do |v|
+  APP_ALL_IMAGE_VERSIONS.each do |v|
     version v, if: :"has_#{v}_version?" do
       process dynamic_version: v
+      process :optimize
     end
   end
 
@@ -80,11 +105,14 @@ class ImageUploader < CarrierWave::Uploader::Base
     end
   end
 
-  def quality(percentage)
+  def optimize
     manipulate! do |img|
-      img.strip
-      img.quality(percentage.to_s)
-      img = yield(img) if block_given?
+      img.combine_options do |c|
+        c.strip
+        c.quality '85'
+        c.depth '8'
+        c.interlace 'Line'
+      end
       img
     end
   end
@@ -111,14 +139,4 @@ end
 
 {% endhighlight %}
 
-The only thing I really don't like is:
-
-{% highlight ruby %}
-%i(slideshow thumbnail black_and_white).each do |v|
-  version v, if: :"has_#{v}_version?" do
-    process dynamic_version: v
-  end
-end
-{% endhighlight %}
-
-I'm wondering if there is a better way of doing this, suggestions are appreciated!
+Suggestions to improve this are always appreciated!
