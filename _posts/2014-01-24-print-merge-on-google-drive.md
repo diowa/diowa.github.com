@@ -14,6 +14,21 @@ We were looking for a way to create simple invoices using a "print merge" approa
 
 <!--more-->
 
+### Update! October, 13th 2014
+After September 30th, autoCrat script stopped working. Here it is a simple fix:
+
+Go to Tools -> Script Editor. Then go to Edit -> Find and replace.
+
+Find `createDecordatedPopupPanel` and replace all with `createPopupPanel`.
+
+Then find `DocsListDialog()` and replace all with `DocsListDialog().setOAuthToken(ScriptApp­.getOAuthToken())`.
+
+Credits:
+[Having trouble with Autocrat...](https://plus.google.com/u/0/+RhondaJenkins61/posts/fsNTY9zu6Q2)
+[Fix for Failed UI on Drive Picker for autoCrat, Doctopus, and formRat](https://www.youtube.com/watch?v=On52heyNLPI)
+
+---
+
 Fortunately there is [autoCrat](http://cloudlab.newvisions.org/scripts/autocrat), a [Google Apps Script](https://developers.google.com/apps-script/) that meets our requirements and we want to share our experience.
 
 autoCrat has a very good documentation and a video tutorial, it was very simple to setup and use. There are some issues with formatted fields (dates, currencies...) but we found a very simple workaround. Let's say the field `B2` contains January, 20th 2014 (in date format). autoCrat will produce **Mon Jan 20 2014 00:00:00 GMT+0100 (CET)**. You can add a new cell with the formula `=TEXT(B2; "mm-dd-yyyy")` and instruct autoCrat to use the new column. We did the same thing for money values (`=TEXT(F2; "$ #,###.00")`). After doing this, you can hide these "helpers" columns in the spreadsheet.
