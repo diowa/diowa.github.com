@@ -8,3 +8,5 @@ gem 'jekyll'
 gem 'jekyll-assets'
 gem 'jekyll-minify-html'
 gem 'jekyll-sitemap'
+
+gem 'autoprefixer-rails'
