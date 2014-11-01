@@ -10,40 +10,31 @@ blog: true
 ---
 {% include JB/setup.html %}
 
-I was looking for a cleaner approach to manage models with different image versions. I came into [this awesome blog post](http://andreapavoni.com/blog/2012/3/using-one-carrierwave-image-uploader-with-different-sizes-on-several-models) by [Andrea Pavoni](http://andreapavoni.com/). I needed multiple, configurable processes so I extended and updated his work.
+I was looking for a cleaner approach to manage models with different image versions. I came into [this awesome blog post](http://andreapavoni.com/blog/2012/3/using-one-carrierwave-image-uploader-with-different-sizes-on-several-models) by [Andrea Pavoni](http://andreapavoni.com/). I needed multiple, configurable processes so I extended and updated his excellent work.
 
 <!--more-->
 
-### Update! October, 9th 2014
-Improved the code with an initializer. In this way we will not pollute models with image versions, we can use the same versions for multiple models but there is a little bit of separation.
+### Update! November, 1st 2014
+Improved the code with an initializer. This fixes an edge case with Rails Admin (versions are not created when validations fails). Now we will not pollute models with image versions and we can use the same versions for multiple models but there is a little bit of separation as a drawback.
 
 We also improved the image uploader in order to provide progressive jpegs.
 
 
 #### image_versions_.rb (initializer)
 {% highlight ruby %}
-# better to always have a thumbnail version because it is used by Rails Admin
-
 APP_IMAGE_VERSIONS = {
   asset: {
     fill_1200x518: {
-      resize_to_fill: [1200, 518],
-      quality: 75
+      resize_to_fill: [1200, 518]
     },
     black_and_white: {
       resize_to_limit: [200, 200],
       desaturate: nil
-    },
-    thumbnail: {
-      resize_to_fill: [400, 172]
     }
   },
   gallery: {
     fill_800x600: {
       resize_to_fill: [800, 600]
-    },
-    thumbnail: {
-      resize_to_fit: [300, 300]
     }
   }
 }
@@ -66,8 +57,6 @@ end
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  before :cache, :setup_available_versions
-
   storage :file
 
   def store_dir
@@ -77,8 +66,13 @@ class ImageUploader < CarrierWave::Uploader::Base
   process resize_to_limit: [2048, 2048]
   process :optimize
 
+  # better to always have a thumbnail version because it is used by Rails Admin
+  version :thumbnail do
+    process resize_to_fit: [300, 300]
+  end
+
   APP_ALL_IMAGE_VERSIONS.each do |v|
-    version v, if: :"has_#{v}_version?" do
+    version v, if: -> (uploader, opts) { uploader.model.class::IMAGE_VERSIONS.has_key?(opts[:version]) } do
       process dynamic_version: v
       process :optimize
     end
@@ -88,11 +82,6 @@ class ImageUploader < CarrierWave::Uploader::Base
     model.class::IMAGE_VERSIONS[version].each do |method, args|
       self.send method, *args
     end
-  end
-
-  def method_missing(method, *args)
-    return false if method.to_s.match(/has_(.*)_version\?/)
-    super
   end
 
   # Note: this process requires a recent version of ImageMagick
@@ -126,15 +115,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
-  protected
-  def setup_available_versions(file)
-    model.class::IMAGE_VERSIONS.keys.each do |key|
-      self.class_eval do
-        define_method("has_#{key}_version?".to_sym) { |file| true }
-      end
-    end
-  end
 end
 
 {% endhighlight %}
