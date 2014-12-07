@@ -9,6 +9,7 @@
   <meta name="author" content="{{ site.author.name }}">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="#fff" name="theme-color">
 
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.production_url }}">
 
@@ -24,7 +25,8 @@
   {% include open_graph.html %}
 
   <!-- Favicons -->
-  <link rel="apple-touch-icon" href="{% asset_path diowa-touch-icon.png %}">
+  <link rel="apple-touch-icon" href="{% asset_path diowa-touch-icon.png %}" size="144x144">
+  <link rel="icon" href="{% asset_path diowa-touch-icon.png %}" size="144x144">
 
   <!-- atom & rss feed -->
   <link href="{{ BASE_PATH }}{{ site.JB.atom_path }}" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
