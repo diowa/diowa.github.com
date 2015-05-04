@@ -14,14 +14,31 @@ We were looking for a way to create simple invoices using a "print merge" approa
 
 <!--more-->
 
+### Update! May, 4th 2015
+After April 20th, autoCrat script stopped working again. Here it is a fix:
+
+Go to Tools -> Script Editor. Then go to Edit -> Find and replace.
+
+* Find `DocsList` and replace all with `DriveApp`
+* Find `"document"` (both lowercase and uppercase, with quotes) and replace all with `MimeType.GOOGLE_DOCS`
+* Find `getFileType` and replace all with `getMimeType`
+* Find `file.addToFolder(folder)` and replace all with `folder.addFile(file)`
+* Find `copy.addToFolder(parent)` and replace with `parent.addFile(copy)`
+* Find `pdfFile.addToFolder(secondaryFolder)` and replace with `secondaryFolder.addFile(pdfFile)`
+* Find `file.addToFolder(secondaryFolder)` and replace with `secondaryFolder.addFile(file)`
+* Find `copy.removeFromFolder(root)` and replace with `DriveApp.removeFile(copy)`
+* Find `pdfFile.removeFromFolder(DriveApp.getRootFolder())` and replace with `DriveApp.removeFile(pdfFile)`
+* Find `file.removeFromFolder(DriveApp.getRootFolder())` and replace with `DriveApp.removeFile(file)`
+
+Credits: [ReferenceError: "DocsList" is not defined](https://code.google.com/p/google-apps-script-issues/issues/detail?id=5017)
+
 ### Update! October, 13th 2014
 After September 30th, autoCrat script stopped working. Here it is a simple fix:
 
 Go to Tools -> Script Editor. Then go to Edit -> Find and replace.
 
-Find `createDecordatedPopupPanel` and replace all with `createPopupPanel`.
-
-Then find `DocsListDialog()` and replace all with `DocsListDialog().setOAuthToken(ScriptApp­.getOAuthToken())`.
+* Find `createDecordatedPopupPanel` and replace all with `createPopupPanel`.
+* Find `DocsListDialog()` and replace all with `DocsListDialog().setOAuthToken(ScriptApp­.getOAuthToken())`.
 
 Credits:
 [Having trouble with Autocrat...](https://plus.google.com/u/0/+RhondaJenkins61/posts/fsNTY9zu6Q2)
