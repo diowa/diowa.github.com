@@ -14,6 +14,9 @@ We were looking for a way to create simple invoices using a "print merge" approa
 
 <!--more-->
 
+### Update! February, 25th 2016
+You should use the last version of autoCrat. Examples here are not up to date, sorry.
+
 ### Update! May, 4th 2015
 After April 20th, autoCrat script stopped working again. Here it is a fix:
 
