@@ -69,11 +69,12 @@ technologies:
         </p>
         <p>
           <span class="fa fa-globe"></span> <a href="http://{{product.url}}">{{product.url}}</a>
-          {% if product.github %}
-            <br>
-            <span class="fa fa-github"></span> <a href="http://github.com/{{product.github}}">{{product.github}}</a>
-          {% endif %}
         </p>
+        {% if product.github %}
+          <p>
+            <span class="fa fa-github"></span> <a href="http://github.com/{{product.github}}">{{product.github}}</a>
+          </p>
+        {% endif %}
       </div>
     </div>
   {% endfor %}
