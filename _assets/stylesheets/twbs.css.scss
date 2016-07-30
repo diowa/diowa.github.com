@@ -2,9 +2,10 @@
 @import "twbs-variables";
 @import "twbs/bootstrap/mixins";
 
-// Reset
+// Reset and dependencies
 @import "twbs/bootstrap/normalize";
 @import "twbs/bootstrap/print";
+//@import "twbs/bootstrap/glyphicons";
 
 // Core CSS
 @import "twbs/bootstrap/scaffolding";
@@ -17,7 +18,6 @@
 
 // Components
 @import "twbs/bootstrap/component-animations";
-//@import "twbs/bootstrap/glyphicons";
 @import "twbs/bootstrap/dropdowns";
 //@import "twbs/bootstrap/button-groups";
 //@import "twbs/bootstrap/input-groups";
@@ -35,6 +35,7 @@
 @import "twbs/bootstrap/media";
 @import "twbs/bootstrap/list-group";
 @import "twbs/bootstrap/panels";
+@import "twbs/bootstrap/responsive-embed";
 //@import "twbs/bootstrap/wells";
 @import "twbs/bootstrap/close";
 
@@ -47,5 +48,3 @@
 // Utility classes
 @import "twbs/bootstrap/utilities";
 @import "twbs/bootstrap/responsive-utilities";
-
-// Fixes
