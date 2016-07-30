@@ -97,14 +97,36 @@ Here it is a working example:
 
 Add this file to git and make sure it ends with a newline.
 
-### 4. Deploy and check
-Deploy to Heroku. You can check that everything is working by running `heroku run console`:
+### 4. Deploy
+
+Deploy to Heroku. Please note that if you have already installed rgeo, you need
+to recompile the gem.
+
+Check the deploy log:
+
+{% highlight bash %}
+# bad
+remote:        Using rgeo 0.5.3
+
+# good
+remote:        Installing rgeo 0.5.3 with native extensions
+{% endhighlight %}
+
+You can force recompiling in two ways:
+
+1. Downgrade to a previous version of rgeo (0.5.1), deploy, rollback, deploy again;
+2. Using the [heroku repo](https://github.com/heroku/heroku-repo) plugin, running `heroku repo:purge_cache -a appname` and deploying again (recommended).
+
+### 5. Check
+
+You can check that everything is working by running `heroku run console`:
 
 {% highlight ruby %}
 > RGeo::Geos.supported?
 => true
 {% endhighlight %}
 
+Please note that you need to recompile the gem with the
 This guide could also be applied to PROJ4. Take a look at our [rgeo-prep buildpack](https://github.com/diowa/heroku-buildpack-rgeo-prep) if you need both libraries.
 
 
