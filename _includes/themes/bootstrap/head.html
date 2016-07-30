@@ -1,5 +1,8 @@
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>{% if page.title %}{{ page.title }}{% if paginator.page > 1 %}{{ paginator.page | prepend: ' | Page ' }}{% endif %}{% else %}{{ site.name }}{% endif %}</title>
 
   {% if page.description %}
@@ -8,13 +11,12 @@
 
   <meta name="author" content="{{ site.author.name }}">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta content="#fff" name="theme-color">
 
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.production_url }}">
 
   {% stylesheet application %}
-  <link href="https://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
+  <link href="https://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700%7COswald:300" rel="stylesheet" type="text/css" media="all">
 
   <!-- HTML5 shim IE8 support of HTML5 elements -->
