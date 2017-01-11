@@ -23,15 +23,16 @@ We had some struggles making RGeo work on Heroku with GEOS extension. Web lacks 
 If you are interested in building the GEOS library on Heroku by yourself, here it is a small guide. First of all, you should open a shell on Heroku via `heroku run bash`, then:
 
 {% highlight bash %}
-curl -O http://download.osgeo.org/geos/geos-3.5.0.tar.bz2
-tar -xjvf geos-3.5.0.tar.bz2
-cd geos-3.5.0
+GEOS_VERSION=3.6.1
+curl -O http://download.osgeo.org/geos/geos-${GEOS_VERSION}.tar.bz2
+tar -xjvf geos-${GEOS_VERSION}.tar.bz2
+cd geos-${GEOS_VERSION}
 ./configure --prefix=/app/.heroku/vendor
 make && make install
-tar -C /app/.heroku/vendor/ -czvf geos-3.5.0-heroku.tar.gz .
+tar -C /app/.heroku/vendor/ -czvf geos-${GEOS_VERSION}-heroku.tar.gz .
 {% endhighlight %}
 
-At this point, we have `geos-3.5.0-heroku.tar.gz` on our Heroku instance and we should move this file on a public location on the web. We are not confident to share what we did because it is a very ugly way of moving files, but if you have suggestions on how to do this properly please leave a comment!
+At this point, we have `geos-3.6.1-heroku.tar.gz` on our Heroku instance and we should move this file on a public location on the web. We are not confident to share what we did because it is a very ugly way of moving files, but if you have suggestions on how to do this properly please leave a comment!
 
 
 ### 2. Set up multiple buildpacks
