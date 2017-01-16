@@ -94,7 +94,7 @@ $ heroku config:set LD_LIBRARY_PATH=/app/lib
 
 Here it is a working example:
 
-    https://s3.amazonaws.com/diowa-buildpacks/geos-3.5.0-heroku.tar.gz
+    https://s3.amazonaws.com/diowa-buildpacks/geos-3.6.1-heroku.tar.gz
 
 Add this file to git and make sure it ends with a newline.
 
