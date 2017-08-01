@@ -7,7 +7,7 @@ paginate: 5
 paginate_path: "/blog/page:num"
 
 # Gems
-gems:
+plugins:
   - jekyll-assets
   - jekyll-minify-html
   - jekyll-paginate

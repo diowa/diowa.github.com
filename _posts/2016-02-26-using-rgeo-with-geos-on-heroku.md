@@ -1,10 +1,10 @@
 ---
 title: "Using RGeo with GEOS on Heroku"
-description: "How to install Rgeo on Heroku, enabling support for GEOS library and optionally Proj4 coordinates"
+description: "How to install Rgeo on Heroku, enabling support for GEOS library and optionally proj.4 coordinates"
 layout: post
 categories : [Heroku]
 tagline: ''
-tags : [RGeo, Heroku, GEOS, PROJ4]
+tags : [RGeo, Heroku, GEOS, proj.4]
 author: tagliala
 blog: true
 ---
@@ -14,28 +14,15 @@ We had some struggles making RGeo work on Heroku with GEOS extension. Web lacks 
 
 <!--more-->
 
+### Update! August, 1st 2017
+
+Please take a look at the new article: [Use RGeo with GEOS on Heroku via apt-get]({% post_url 2017-08-01-using-rgeo-with-geos-on-heroku-with-apt-get %})
+
 ### Update! July, 1st 2016
 
 `BUILDPACK_URL` was deprecated, so here it is a new approach.
 
-
-### 1. Compiling GEOS (Optional)
-If you are interested in building the GEOS library on Heroku by yourself, here it is a small guide. First of all, you should open a shell on Heroku via `heroku run bash`, then:
-
-{% highlight bash %}
-GEOS_VERSION=3.6.1
-curl -O http://download.osgeo.org/geos/geos-${GEOS_VERSION}.tar.bz2
-tar -xjvf geos-${GEOS_VERSION}.tar.bz2
-cd geos-${GEOS_VERSION}
-./configure --prefix=/app/.heroku/vendor
-make && make install
-tar -C /app/.heroku/vendor/ -czvf geos-${GEOS_VERSION}-heroku.tar.gz .
-{% endhighlight %}
-
-At this point, we have `geos-3.6.1-heroku.tar.gz` on our Heroku instance and we should move this file on a public location on the web. We are not confident to share what we did because it is a very ugly way of moving files, but if you have suggestions on how to do this properly please leave a comment!
-
-
-### 2. Set up multiple buildpacks
+### 1. Set up multiple buildpacks
 
 We need to set `LD_LIBRARY_PATH` config variable to `/app/lib` and use the following buildpacks:
 
@@ -107,15 +94,15 @@ Check the deploy log:
 
 {% highlight bash %}
 # bad
-remote:        Using rgeo 0.5.3
+remote:        Using rgeo 0.6.0
 
 # good
-remote:        Installing rgeo 0.5.3 with native extensions
+remote:        Installing rgeo 0.6.0 with native extensions
 {% endhighlight %}
 
 You can force recompiling in two ways:
 
-1. Downgrade to a previous version of rgeo (0.5.1), deploy, rollback, deploy again;
+1. Downgrade to a previous version of rgeo (0.5.3), deploy, rollback, deploy again;
 2. Using the [heroku repo](https://github.com/heroku/heroku-repo) plugin, running `heroku repo:purge_cache -a appname` and deploying again (recommended).
 
 ### 5. Check
@@ -127,8 +114,7 @@ You can check that everything is working by running `heroku run console`:
 => true
 {% endhighlight %}
 
-Please note that you need to recompile the gem with the
-This guide could also be applied to PROJ4. Take a look at our [rgeo-prep buildpack](https://github.com/diowa/heroku-buildpack-rgeo-prep) if you need both libraries.
+This guide could also be applied to proj.4. Take a look at our [rgeo-prep buildpack](https://github.com/diowa/heroku-buildpack-rgeo-prep) if you need both libraries.
 
 
 ### References
