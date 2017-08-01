@@ -45,12 +45,11 @@ You need to add the following entries:
 #### Method 2: Using the console
 
 {% highlight bash %}
-$ heroku buildpacks:set https://github.com/heroku/heroku-buildpack-apt
-$ heroku buildpacks:add heroku/ruby
+$ heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-apt
 {% endhighlight %}
 
 
-### 4. Deploy
+### 3. Deploy
 
 Deploy to Heroku. Please note that if you have already installed rgeo, you need
 to recompile the gem.
@@ -67,7 +66,7 @@ remote:        Installing rgeo 0.6.0 with native extensions
 
 You can force recompiling by using the [heroku repo](https://github.com/heroku/heroku-repo) plugin, running `heroku repo:purge_cache -a appname` and deploying again.
 
-### 5. Check
+### 4. Check
 
 You can check that everything is working by running `heroku run console`:
 
