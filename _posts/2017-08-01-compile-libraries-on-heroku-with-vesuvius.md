@@ -30,7 +30,7 @@ It comes with [proj.4](http://proj4.org/index.html) and [GEOS](https://trac.osge
 
 ## Manual Setup
 
-1. Clone the repo at https://github.com/tagliala/vesuvius
+1. Clone the repo at [https://github.com/tagliala/vesuvius](https://github.com/tagliala/vesuvius)
 2. Create a new Heroku application
 3. Set your buildpack to Heroku's default Ruby buildpack
 {% highlight sh %}
