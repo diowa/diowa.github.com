@@ -75,6 +75,12 @@ You can check that everything is working by running `heroku run console`:
 => true
 {% endhighlight %}
 
+### Notes
+
+An APT package may not be up to date with the latest version of the library it includes. In the before example, you will get GEOS 3.5.0, but (at the moment I'm writing) version 3.6.2 is out.
+
+If you need newer versions of your libraries, you could use the following approach: [Compile libraries on Heroku with Vesuvius]({% post_url 2017-08-01-compile-libraries-on-heroku-with-vesuvius %}).
+
 ### References
 
 * [Buildpacks](https://devcenter.heroku.com/articles/buildpacks)

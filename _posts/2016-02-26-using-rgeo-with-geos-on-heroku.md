@@ -22,7 +22,11 @@ Please take a look at the new article: [Use RGeo with GEOS on Heroku via apt-get
 
 `BUILDPACK_URL` was deprecated, so here it is a new approach.
 
-### 1. Set up multiple buildpacks
+### 1. Compile libraries (optional)
+
+Take a look at [Compile libraries on Heroku with Vesuvius]({% post_url 2017-08-01-compile-libraries-on-heroku-with-vesuvius %}) and
+
+### 2. Set up multiple buildpacks
 
 We need to set `LD_LIBRARY_PATH` config variable to `/app/lib` and use the following buildpacks:
 
