@@ -3,7 +3,7 @@ GEM
   specs:
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
-    autoprefixer-rails (7.1.2.3)
+    autoprefixer-rails (7.1.2.6)
       execjs
     coffee-script (2.4.1)
       coffee-script-source
@@ -26,7 +26,7 @@ GEM
       multi_css (>= 0.1.0)
       multi_js (>= 0.1.0)
     htmlentities (4.3.4)
-    jekyll (3.5.1)
+    jekyll (3.5.2)
       addressable (~> 2.4)
       colorator (~> 1.0)
       jekyll-sass-converter (~> 1.0)
