@@ -1,6 +1,6 @@
 <footer>
   <div class="footer-wrapper">
-    <img src="{{'diowa-footer.png' | asset_path }}" width="56" height="64" alt="diowa" class="footer-logo">
+    <img src="{% asset diowa-footer.png @path %}" width="56" height="64" alt="diowa" class="footer-logo">
     <div class="container">
       <ul class="list-inline pull-right">
         {% if page.group == 'blog' %}
@@ -19,7 +19,7 @@
   </div>
 </footer>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-{% javascript application %}
+{% asset application.js async %}
 {% include JB/analytics.html %}
 <!-- Respond.js IE8 support of media queries -->
 <!--[if lt IE 9]>

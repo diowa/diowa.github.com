@@ -60,7 +60,7 @@ technologies:
     <div class="row row-product">
       <div class="col-sm-5">
         <!-- 1060 x 876 -->
-        <a href="http://{{product.url}}" class="thumbnail thumbnail-product"><img class="img-responsive" src="{{product.image | asset_path }}" alt="{{product.title}}"/></a>
+        <a href="http://{{product.url}}" class="thumbnail thumbnail-product"><img class="img-responsive" src="{% asset {{product.image}} @path %}" alt="{{product.title}}"/></a>
       </div>
       <div class="col-sm-7">
         <h3>{{product.title}}</h3>
@@ -85,7 +85,7 @@ technologies:
   {% for technology in page.technologies %}
     <li>
       <a href="{{technology.url}}">
-        <img class="img-technology" alt="{{technology.title}}" src="{{technology.image | asset_path}}"/>
+        <img class="img-technology" alt="{{technology.title}}" src="{% asset {{technology.image}} @path %}"/>
         <span class="title-technology">{{technology.title}}</span>
       </a>
     </li>

@@ -1,0 +1,47 @@
+@import "twbs-variables";
+@import "twbs/bootstrap/mixins";
+
+.navbar-toggle {
+  .icon-bar {
+    // same duration as bootstrap's collapse
+    transition: all .35s ease-in-out;
+    backface-visibility: hidden;
+  }
+
+  .icon-bar--top {
+    transform: rotate3d(0, 0, 1, 45deg);
+    transform-origin: 17% 200%;
+  }
+
+  .icon-bar--middle {
+    transform: rotate3d(0, 1, 0, 90deg);
+  }
+
+  .icon-bar--bottom {
+    transform: rotate3d(0, 0, 1, -45deg);
+    transform-origin: 17% -100%;
+  }
+
+  &.collapsed {
+    .icon-bar {
+      transform: rotate3d(0, 0, 0, 0deg);
+    }
+  }
+}
+
+.navbar-brand {
+  padding: 14px 15px;
+  img {
+    height: 32px;
+  }
+}
+
+@media (min-width: #{$screen-sm-min}) {
+  .navbar {
+    .navbar-nav {
+      > li > a {
+        text-transform: uppercase;
+      }
+    }
+  }
+}

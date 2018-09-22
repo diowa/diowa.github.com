@@ -16,9 +16,9 @@
 {% endif %}
 
 {% if page.image %}
-<meta content="{{ page.image | asset_path | prepend: site.production_url }}" property="og:image">
+<meta content="{% asset {{page.image}} @path | prepend: site.production_url %}" property="og:image">
 {% else %}
-<meta content="{{ 'diowa-open-graph.jpg' | asset_path | prepend: site.production_url }}" property="og:image">
+<meta content="{% asset diowa-open-graph.jpg @path | prepend: site.production_url %}" property="og:image">
 {% endif %}
 
 {% if page.categories %}

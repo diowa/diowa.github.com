@@ -45,7 +45,7 @@ members:
       <div class="media media-person">
         {% if member.image %}
           <div class="pull-left">
-            <img class="media-object" src="{{member.image | asset_path }}" alt="{{member.name}}">
+            <img class="media-object" src="{% asset {{member.image}} @path %}" alt="{{member.name}}">
           </div>
         {% endif %}
         <div class="media-body">

@@ -15,7 +15,7 @@
 
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.production_url }}">
 
-  {% stylesheet application %}
+  {% asset application.css %}
   <link href="https://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700%7COswald:300" rel="stylesheet" type="text/css" media="all">
 
@@ -27,8 +27,8 @@
   {% include open_graph.html %}
 
   <!-- Favicons -->
-  <link rel="apple-touch-icon" href="{% asset_path diowa-touch-icon.png %}" size="144x144">
-  <link rel="icon" href="{% asset_path diowa-touch-icon.png %}" size="144x144">
+  <link rel="apple-touch-icon" href="{% asset diowa-touch-icon.png @path %}" size="144x144">
+  <link rel="icon" href="{% asset diowa-touch-icon.png @path %}" size="144x144">
 
   <!-- atom & rss feed -->
   <link href="{{ BASE_PATH }}{{ site.JB.atom_path }}" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">

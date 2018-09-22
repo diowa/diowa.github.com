@@ -6,7 +6,7 @@ exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 paginate: 5
 paginate_path: "/blog/page:num"
 
-# Gems
+# Plugins
 plugins:
   - jekyll-assets
   - jekyll-minify-html
@@ -164,7 +164,7 @@ assets:
   compress:
     css: true
     js: true
-  prefix: "/assets"
+  destination: "/assets"
   assets:
     - "*.png"
     - "bundle.css"
