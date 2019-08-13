@@ -14,6 +14,10 @@ Here it is a new, super-easy approach to use Rgeo with GEOS on Heroku, by using 
 
 <!--more-->
 
+### Update! August, 13th 2019
+
+Add a note about `LD_LIBRARY_PATH` variable and the Rake Task
+
 ### 1. Add Aptfile
 
 At the root of your repository, add a file called `Aptfile` with the following content:
@@ -48,8 +52,15 @@ You need to add the following entries:
 $ heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-apt
 {% endhighlight %}
 
+### 3. Unset LD_LIBRARY_PATH
 
-### 3. Deploy
+If you have previously set the `LD_LIBRARY_PATH` variable, please unset that
+
+{% highlight bash %}
+$ heroku config:unset LD_LIBRARY_PATH
+{% endhighlight %}
+
+### 4. Deploy
 
 Deploy to Heroku. Please note that if you have already installed rgeo, you need
 to recompile the gem.
@@ -66,13 +77,35 @@ remote:        Installing rgeo 0.6.0 with native extensions
 
 You can force recompiling by using the [heroku repo](https://github.com/heroku/heroku-repo) plugin, running `heroku repo:purge_cache -a appname` and deploying again.
 
-### 4. Check
+### 5. Check
 
 You can check that everything is working by running `heroku run console`:
 
 {% highlight ruby %}
 > RGeo::Geos.supported?
 => true
+{% endhighlight %}
+
+### 6. Optional Release task
+
+You may be interested in checking that RGeo properly supports GEOS at deploy
+time. If something goes wrong, the deploy will fail.
+
+Add a `release` entry to your `Procfile`:
+
+{% highlight bash %}
+release: bundle exec rails rgeo_supports_geos
+{% endhighlight %}
+
+Create a rake task:
+
+{% highlight ruby %}
+# frozen_string_literal: true
+
+desc 'Check that RGeo supports GEOS'
+task :rgeo_supports_geos do
+  abort 'Error: RGeo does not support GEOS, application cannot start.' unless RGeo::Geos.supported?
+end
 {% endhighlight %}
 
 ### Notes
@@ -86,3 +119,4 @@ If you need newer versions of your libraries, you could use the following approa
 * [Buildpacks](https://devcenter.heroku.com/articles/buildpacks)
 * [heroku-buildpack-apt](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-apt)
 * [app.json Schema](https://devcenter.heroku.com/articles/app-json-schema#buildpacks)
+* [Release Phase](https://devcenter.heroku.com/articles/release-phase)

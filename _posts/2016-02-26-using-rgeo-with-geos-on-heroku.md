@@ -14,6 +14,10 @@ We had some struggles making RGeo work on Heroku with GEOS extension. Web lacks 
 
 <!--more-->
 
+### Update! August, 13th 2019
+
+Add a release rake tasks
+
 ### Update! August, 1st 2017
 
 Please take a look at the new article: [Use RGeo with GEOS on Heroku via apt-get]({% post_url 2017-08-01-using-rgeo-with-geos-on-heroku-with-apt-get %})
@@ -118,8 +122,29 @@ You can check that everything is working by running `heroku run console`:
 => true
 {% endhighlight %}
 
-This guide could also be applied to proj.4. Take a look at our [rgeo-prep buildpack](https://github.com/diowa/heroku-buildpack-rgeo-prep) if you need both libraries.
+### 6. Optional Release task
 
+You may be interested in checking that RGeo properly supports GEOS at deploy
+time. If something goes wrong, the deploy will fail.
+
+Add a `release` entry to your `Procfile`:
+
+{% highlight bash %}
+release: bundle exec rails rgeo_supports_geos
+{% endhighlight %}
+
+Create a rake task:
+
+{% highlight ruby %}
+# frozen_string_literal: true
+
+desc 'Check that RGeo supports GEOS'
+task :rgeo_supports_geos do
+  abort 'Error: RGeo does not support GEOS, application cannot start.' unless RGeo::Geos.supported?
+end
+{% endhighlight %}
+
+This guide could also be applied to proj.4. Take a look at our [rgeo-prep buildpack](https://github.com/diowa/heroku-buildpack-rgeo-prep) if you need both libraries.
 
 ### References
 
@@ -128,3 +153,4 @@ This guide could also be applied to proj.4. Take a look at our [rgeo-prep buildp
 * [Buildpacks](https://devcenter.heroku.com/articles/buildpacks)
 * [Using Multiple Buildpacks for an App](https://devcenter.heroku.com/articles/using-multiple-buildpacks-for-an-app)
 * [app.json Schema](https://devcenter.heroku.com/articles/app-json-schema#buildpacks)
+* [Release Phase](https://devcenter.heroku.com/articles/release-phase)
