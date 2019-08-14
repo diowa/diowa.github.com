@@ -1,0 +1,530 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Nitrous.IO: Rails development inside your browser</title>
+
+  
+    <meta name="description" content="Nitrous.IO: Rails development inside your browser">
+  
+
+  <meta name="author" content="Diowa">
+
+  <meta content="#fff" name="theme-color">
+
+  <link rel="canonical" href="http://www.diowa.com/blog/rails/2013/07/22/nitrous-io-rails-development-inside-your-browser">
+
+  <link rel="stylesheet" type="text/css" href="/assets/application-78a3e4752264a86b7b7d484506ce0f09bd034160d413b054a56567caba5c7da4.css">
+  <link href="https://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700%7COswald:300" rel="stylesheet" type="text/css" media="all">
+
+  <!-- HTML5 shim IE8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <![endif]-->
+
+  <meta content="diowa" property="og:site_name">
+<meta content="Nitrous.IO: Rails development inside your browser" property="og:title">
+<meta content="article" property="og:type">
+<meta content="Nitrous.IO: Rails development inside your browser" property="og:description">
+
+
+<meta content="http://www.diowa.com/blog/rails/2013/07/22/nitrous-io-rails-development-inside-your-browser" property="og:url">
+
+
+
+<meta content="2013-07-22T00:00:00+02:00" property="article:published_time">
+
+
+
+<meta content="cesidio" property="article:author">
+
+
+
+<meta content="/assets/diowa-open-graph-b0adb7f74230dfa8bec7f809819b3550b2d6027a60fba6ff0c02d5967f23976f.jpg" property="og:image">
+
+
+
+  
+  <meta content="Rails" property="article:section">
+  
+
+
+
+  
+  <meta content="rails" property="article:tag">
+  
+  <meta content="ruby" property="article:tag">
+  
+  <meta content="Nitrous.IO" property="article:tag">
+  
+  <meta content="web development" property="article:tag">
+  
+
+
+
+  <link href="https://plus.google.com/+CesidioDiLanda" rel="author">
+
+
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" href="/assets/diowa-touch-icon-43b4cd7ea6b37652e51fff2e780837a5bc2532b4e77879a7f15a4d4d36d242f4.png" size="144x144">
+  <link rel="icon" href="/assets/diowa-touch-icon-43b4cd7ea6b37652e51fff2e780837a5bc2532b4e77879a7f15a4d4d36d242f4.png" size="144x144">
+
+  <!-- atom & rss feed -->
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+  <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+</head>
+
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar-responsive-collapse" aria-expanded="false">
+        <span class="sr-only"></span>
+        <span class="icon-bar icon-bar--top"></span>
+        <span class="icon-bar icon-bar--middle"></span>
+        <span class="icon-bar icon-bar--bottom"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img alt="diowa" src="/assets/diowa-569bda59a493ab6b6d0edf5b3b6c55b585cfa9f56320bbaf1c2dd8ab6baea228.png" height="32" width="100"/></a>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-responsive-collapse">
+      <ul class="nav navbar-nav navbar-right">
+      
+        <li class="active"><a href="/blog/" class="active">Blog</a></li>
+      
+      
+        
+        
+
+
+  
+    
+      
+        
+        <li><a href="/about">About</a></li>
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+        
+        <li><a href="/contact">Contact</a></li>
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+    
+  
+
+
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    
+
+
+<div class="container">
+  <article>
+    <div class="page-header">
+      <h1>Nitrous.IO: Rails development inside your browser <small></small></h1>
+      <p class="text-muted">
+        Posted by <b>Cesidio Di Landa</b>
+        on <b>22 July 2013</b>
+      </p>
+    </div>
+    <div class="content">
+      
+<p>Years ago I was amused by Heroku giving the possibility to do development inside a web IDE. That product was called <a href="http://web.archive.org/web/20090121092638/http://herokugarden.com/">Heroku Garden</a> but it was discontinued and Heroku focused only on easing the deployment of web apps.</p>
+
+<!--more-->
+
+<p>Nowadays deployment is pretty much automated while development still happens on a local machine where you need to install all the relevant software like web servers, database servers, SDKs, etc. You have to do this only once per machine, but it is a very time consuming process and if for some reasons you don’t have your machine with you, you are not able to work on your projects, even though your code is probably already hosted on GitHub and accessible from everywhere.</p>
+
+<p>Nitrous.IO tries to fix that and gives you the ability to do web development inside a browser from any computer connected to the Internet. In this blog post I will show how to set up a Nitrous.IO box to work on <a href="https://github.com/diowa/ruby2-rails4-bootstrap-heroku">Ruby2 Rails4 Bootstrap Heroku Starter App</a>.</p>
+
+<h3 id="1-create-a-box">1. Create a box</h3>
+
+<p>The first thing to do is to <a href="https://www.nitrous.io/join/rAkwYY7Gqog">create a box on Nitrous.IO</a> (note: this is a referral link. <a href="https://www.nitrous.io/join">This one is a link without referral</a>). You need at least 190 N2O to get 512MB of memory (the minimum amount of memory required to run our starter app). When you sign up at Nitrous.IO you get 150 N2O. To get extra N2O you can either pay or <a href="https://www.nitrous.io/app#/n2o/bonus">link your social accounts and invite colleagues to try the service</a>.</p>
+
+<h3 id="2-set-up-ssh-github-and-heroku">2. Set up SSH, GitHub and Heroku</h3>
+
+<p>Now you have to follow these steps:</p>
+<ul>
+  <li><a href="http://help.nitrous.io/ssh-add/">Create a new SSH key</a></li>
+  <li><a href="http://help.nitrous.io/github-add-key/">Link your GitHub account</a></li>
+  <li><a href="http://help.nitrous.io/heroku/">Integrate with Heroku</a></li>
+</ul>
+
+<h3 id="3-set-up-databases">3. Set up databases</h3>
+
+<p><a href="https://postgres.heroku.com/">Create two free dev plan databases with Heroku Postgres</a>, one for development and one for testing.</p>
+
+<p>The Rails4 starter app we are going to use has a <a href="https://github.com/diowa/ruby2-rails4-bootstrap-heroku/blob/master/config/database.yml">database.yml</a> file configured to work on Nitrous.IO, TravisCI and a local machine (comments and pull requests are welcome).</p>
+
+<p>Once you create these 2 databases, open the web IDE for your Nitrous.IO box and add the following lines to <code class="highlighter-rouge">.bashrc</code> file in your home (Tip: if you cannot see that file from the editor is probably because you have to enable the option to show hidden files):</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">export </span><span class="nv">STARTER_APP_DEV_DB_DATABASE</span><span class="o">=</span>YOUR_DEV_DB_DATABASE
+<span class="nb">export </span><span class="nv">STARTER_APP_DEV_DB_USER</span><span class="o">=</span>YOUR_DEV_DB_USER
+<span class="nb">export </span><span class="nv">STARTER_APP_DEV_DB_PASSWORD</span><span class="o">=</span>YOUR_DEV_DB_PASSWORD
+<span class="nb">export </span><span class="nv">STARTER_APP_DEV_DB_HOST</span><span class="o">=</span>YOUR_DEV_DB_HOST
+<span class="nb">export </span><span class="nv">STARTER_APP_DEV_DB_PORT</span><span class="o">=</span>YOUR_DEV_DB_PORT
+
+<span class="nb">export </span><span class="nv">STARTER_APP_TEST_DB_DATABASE</span><span class="o">=</span>YOUR_TEST_DB_DATABASE
+<span class="nb">export </span><span class="nv">STARTER_APP_TEST_DB_USER</span><span class="o">=</span>YOUR_TEST_DB_USER
+<span class="nb">export </span><span class="nv">STARTER_APP_TEST_DB_PASSWORD</span><span class="o">=</span>YOUR_TEST_DB_PASSWORD
+<span class="nb">export </span><span class="nv">STARTER_APP_TEST_DB_HOST</span><span class="o">=</span>YOUR_TEST_DB_HOST
+<span class="nb">export </span><span class="nv">STARTER_APP_TEST_DB_PORT</span><span class="o">=</span>YOUR_TEST_DB_PORT</code></pre></figure>
+
+<h3 id="4-clone-the-starter-app">4. Clone the starter app</h3>
+
+<p>Use the standard git commands to clone Ruby2 Rails4 Bootstrap Starter App inside your Nitrous.IO box shell:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd </span>workspace
+git clone https://github.com/diowa/ruby2-rails4-bootstrap-heroku.git
+<span class="nb">cd </span>ruby2-rails4-bootstrap-heroku
+bundle</code></pre></figure>
+
+<p>Test that specs pass:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">rspec</code></pre></figure>
+
+<p>Start the server and check that everything works from the Preview menu item (default port is 3000).</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">rails s</code></pre></figure>
+
+<h3 id="5-deploy-on-heroku">5. Deploy on Heroku</h3>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">heroku create
+git push heroku master</code></pre></figure>
+
+<h3 id="considerations">Considerations</h3>
+
+<p>Being able to work on your projects without carrying your machine is a great freedom, but it comes at a price: the web ide is not that productive. Simple things like a global search and replace require you to master the command line. I certainly miss TextMate, <a href="http://nvie.com/posts/a-successful-git-branching-model/">git-flow</a> or something like GitX. A viable compromise is to install <a href="https://www.nitrous.io/mac">Nitrous.IO for Mac</a> if you work on a Mac, so that you can just install your favorite text editor and git GUI.</p>
+
+    </div>
+  </article>
+  <hr>
+
+
+  <ul class="list-inline">
+    <li>Categories:</li>
+    
+    
+
+
+  
+    
+      <li><a href="/blog/categories.html#Rails-ref">
+        Rails
+        (<span>2</span>)
+      </a></li>
+    
+  
+
+
+
+  </ul>
+
+
+  <ul class="list-inline">
+    <li>Tags:</li>
+    
+    
+
+
+  
+    
+      <li><a href="/blog/tags.html#rails-ref">rails (<span>1</span>)</a></li>
+    
+      <li><a href="/blog/tags.html#ruby-ref">ruby (<span>2</span>)</a></li>
+    
+      <li><a href="/blog/tags.html#Nitrous.IO-ref">Nitrous.IO (<span>1</span>)</a></li>
+    
+      <li><a href="/blog/tags.html#web development-ref">web development (<span>1</span>)</a></li>
+    
+  
+
+
+
+  </ul>
+
+  <ul class="pager hidden-print">
+  
+    <li class="previous"><a href="/blog/open%20source/2013/06/25/ruby2-rails4-bootstrap-heroku" title="Ruby2 Rails4 Bootstrap Heroku">&larr; Previous</a></li>
+  
+    <!--<li><a href="/blog/archive.html">Archive</a></li>-->
+  
+    <li class="next"><a href="/blog/productivity/2014/01/24/print-merge-on-google-drive" title="Print merge on Google Drive with autoCrat">Next &rarr;</a></li>
+  
+  </ul>
+  <ul class="nav nav-justified nav-blog hidden-print">
+  
+  
+  
+
+
+  
+    
+      
+    
+  
+    
+      
+        
+        <li><a href="/blog/archive"><span class="fa fa-archive"></span> Archive</a></li>
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+        
+        <li><a href="/blog/categories"><span class="fa fa-folder-open"></span> Categories</a></li>
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+        
+        <li><a href="/blog/tags"><span class="fa fa-tags"></span> Tags</a></li>
+        
+      
+    
+  
+
+
+
+
+</ul>
+
+  
+
+
+  <div id="disqus_thread" class="hidden-print"></div>
+<script type="text/javascript">
+    
+    var disqus_shortname = 'diowa'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+
+</div>
+
+
+
+    <footer>
+  <div class="footer-wrapper">
+    <img src="/assets/diowa-footer-285e6f3dc582358bcc50309309e5a28fd2e070a7aa883a13c700e100b891d712.png" width="56" height="64" alt="diowa" class="footer-logo">
+    <div class="container">
+      <ul class="list-inline pull-right">
+        
+          <li><a href="/blog/">Blog</a></li>
+        
+        
+        
+        
+
+
+  
+    
+      
+        
+        <li><a href="/about">About</a></li>
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+        
+        <li><a href="/contact">Contact</a></li>
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+    
+  
+
+
+
+
+      </ul>
+      <ul class="list-inline">
+        <li>&copy; diowa 2018</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script async="" type="text/javascript" src="/assets/application-cdb9a8c5f535b6bcc2dbd71f7a29d680698c39f9437754b07fc4d40011943c4b.js"></script>
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-39283101-1', 'diowa.com');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+<!-- Respond.js IE8 support of media queries -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+  </body>
+</html>
+

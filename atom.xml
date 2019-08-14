@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>diowa</title>
+ <link href="http://www.diowa.com/" rel="self"/>
+ <link href="http://www.diowa.com"/>
+ <updated>2019-08-14T11:00:15+02:00</updated>
+ <id>http://www.diowa.com</id>
+ <author>
+   <name>Diowa</name>
+   <email>info@diowa.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>Blog goes open source</title>
+   <link href="http://www.diowa.com/blog/open%20source/2018/09/22/blog-goes-open-source"/>
+   <updated>2018-09-22T00:00:00+02:00</updated>
+   <id>http://www.diowa.com/blog/open%20source/2018/09/22/blog-goes-open-source</id>
+   <content type="html">
+&lt;p&gt;Hi, we just want to inform that our blog source code is now available to the public.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;The codebase is quite old and we are going to share it on our &lt;a href=&quot;https://github.com/diowa/diowa.github.com&quot;&gt;GitHub repository&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Using RGeo with GEOS on Heroku with apt-get</title>
+   <link href="http://www.diowa.com/blog/heroku/2017/08/01/using-rgeo-with-geos-on-heroku-with-apt-get"/>
+   <updated>2017-08-01T00:00:00+02:00</updated>
+   <id>http://www.diowa.com/blog/heroku/2017/08/01/using-rgeo-with-geos-on-heroku-with-apt-get</id>
+   <content type="html">
+&lt;p&gt;Here it is a new, super-easy approach to use Rgeo with GEOS on Heroku, by using the amazing &lt;code class=&quot;highlighter-rouge&quot;&gt;heroku-buildpack-apt&lt;/code&gt; buildpack.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h3 id=&quot;update-august-13th-2019&quot;&gt;Update! August, 13th 2019&lt;/h3&gt;
+
+&lt;p&gt;Add a note about &lt;code class=&quot;highlighter-rouge&quot;&gt;LD_LIBRARY_PATH&lt;/code&gt; variable and the Rake Task&lt;/p&gt;
+
+&lt;h3 id=&quot;1-add-aptfile&quot;&gt;1. Add Aptfile&lt;/h3&gt;
+
+&lt;p&gt;At the root of your repository, add a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;Aptfile&lt;/code&gt; with the following content:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;libproj-dev
+libgeos-dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Make sure it ends with a newline.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-add-the-heroku-buildpack-apt-buildpack&quot;&gt;2. Add the heroku-buildpack-apt buildpack&lt;/h3&gt;
+
+&lt;h4 id=&quot;method-1-using-appjson&quot;&gt;Method 1: Using app.json&lt;/h4&gt;
+
+&lt;p&gt;You need to add the following entries:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;buildpacks&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://github.com/heroku/heroku-buildpack-apt&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;heroku/ruby&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;method-2-using-the-console&quot;&gt;Method 2: Using the console&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;heroku buildpacks:add &lt;span class=&quot;nt&quot;&gt;--index&lt;/span&gt; 1 https://github.com/heroku/heroku-buildpack-apt&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;3-unset-ld_library_path&quot;&gt;3. Unset LD_LIBRARY_PATH&lt;/h3&gt;
+
+&lt;p&gt;If you have previously set the &lt;code class=&quot;highlighter-rouge&quot;&gt;LD_LIBRARY_PATH&lt;/code&gt; variable, please unset that&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;heroku config:unset LD_LIBRARY_PATH&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;4-deploy&quot;&gt;4. Deploy&lt;/h3&gt;
+
+&lt;p&gt;Deploy to Heroku. Please note that if you have already installed rgeo, you need
+to recompile the gem.&lt;/p&gt;
+
+&lt;p&gt;Check the deploy log:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# bad&lt;/span&gt;
+remote:        Using rgeo 0.6.0
+
+&lt;span class=&quot;c&quot;&gt;# good&lt;/span&gt;
+remote:        Installing rgeo 0.6.0 with native extensions&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You can force recompiling by using the &lt;a href=&quot;https://github.com/heroku/heroku-repo&quot;&gt;heroku repo&lt;/a&gt; plugin, running &lt;code class=&quot;highlighter-rouge&quot;&gt;heroku repo:purge_cache -a appname&lt;/code&gt; and deploying again.&lt;/p&gt;
+
+&lt;h3 id=&quot;5-check&quot;&gt;5. Check&lt;/h3&gt;
+
+&lt;p&gt;You can check that everything is working by running &lt;code class=&quot;highlighter-rouge&quot;&gt;heroku run console&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RGeo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Geos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;supported?&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;6-optional-release-task&quot;&gt;6. Optional Release task&lt;/h3&gt;
+
+&lt;p&gt;You may be interested in checking that RGeo properly supports GEOS at deploy
+time. If something goes wrong, the deploy will fail.&lt;/p&gt;
+
+&lt;p&gt;Add a &lt;code class=&quot;highlighter-rouge&quot;&gt;release&lt;/code&gt; entry to your &lt;code class=&quot;highlighter-rouge&quot;&gt;Procfile&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;release: bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;rails rgeo_supports_geos&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Create a rake task:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# frozen_string_literal: true&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Check if RGeo supports GEOS'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:rgeo_supports_geos&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;abort&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Error: RGeo does not support GEOS.'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RGeo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Geos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;supported?&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;notes&quot;&gt;Notes&lt;/h3&gt;
+
+&lt;p&gt;An APT package may not be up to date with the latest version of the library it includes. In the before example, you will get GEOS 3.5.0, but (at the moment I’m writing) version 3.6.2 is out.&lt;/p&gt;
+
+&lt;p&gt;If you need newer versions of your libraries, you could use the following approach: &lt;a href=&quot;/blog/heroku/2017/08/01/compile-libraries-on-heroku-with-vesuvius&quot;&gt;Compile libraries on Heroku with Vesuvius&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://devcenter.heroku.com/articles/buildpacks&quot;&gt;Buildpacks&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-apt&quot;&gt;heroku-buildpack-apt&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://devcenter.heroku.com/articles/app-json-schema#buildpacks&quot;&gt;app.json Schema&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://devcenter.heroku.com/articles/release-phase&quot;&gt;Release Phase&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Compile libraries on Heroku with Vesuvius</title>
+   <link href="http://www.diowa.com/blog/heroku/2017/08/01/compile-libraries-on-heroku-with-vesuvius"/>
+   <updated>2017-08-01T00:00:00+02:00</updated>
+   <id>http://www.diowa.com/blog/heroku/2017/08/01/compile-libraries-on-heroku-with-vesuvius</id>
+   <content type="html">
+&lt;p&gt;It has been a long time since &lt;a href=&quot;https://github.com/heroku/vulcan&quot;&gt;Vulcan&lt;/a&gt; has been deprecated. Now, gcc &lt;a href=&quot;https://devcenter.heroku.com/articles/stack-packages&quot;&gt;is no longer available at runtime on heroku-16&lt;/a&gt; so Vesuvius comes in help.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;why-vesuvius&quot;&gt;Why Vesuvius?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/heroku/vulcan&quot;&gt;Vulcan&lt;/a&gt; has been deprecated and GCC is only available &lt;a href=&quot;https://devcenter.heroku.com/articles/stack-packages&quot;&gt;at build time&lt;/a&gt; on &lt;code class=&quot;highlighter-rouge&quot;&gt;heroku-16&lt;/code&gt; stack.&lt;/p&gt;
+
+&lt;p&gt;Even with &lt;code class=&quot;highlighter-rouge&quot;&gt;heroku run bash&lt;/code&gt;, compiling stuff on Heroku was painful, time consuming, and you needed a third-party cloud storage to move your compiled library in order to download it.&lt;/p&gt;
+
+&lt;p&gt;With &lt;a href=&quot;https://github.com/tagliala/vesuvius&quot;&gt;&lt;strong&gt;Vesuvius&lt;/strong&gt;&lt;/a&gt;, this is no longer the case. During the deploy, &lt;strong&gt;Vesuvius&lt;/strong&gt; will run all scripts located in &lt;code class=&quot;highlighter-rouge&quot;&gt;/scripts/libraries&lt;/code&gt; and will move output files to a public directory.&lt;/p&gt;
+
+&lt;p&gt;It comes with &lt;a href=&quot;http://proj4.org/index.html&quot;&gt;proj.4&lt;/a&gt; and &lt;a href=&quot;https://trac.osgeo.org/geos/&quot;&gt;GEOS&lt;/a&gt; as examples.&lt;/p&gt;
+
+&lt;h2 id=&quot;automatic-setup&quot;&gt;Automatic Setup&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://heroku.com/deploy?template=https://github.com/tagliala/vesuvius/tree/master&quot;&gt;&lt;img src=&quot;https://www.herokucdn.com/deploy/button.svg&quot; alt=&quot;Deploy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;manual-setup&quot;&gt;Manual Setup&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Clone the repo at &lt;a href=&quot;https://github.com/tagliala/vesuvius&quot;&gt;https://github.com/tagliala/vesuvius&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Create a new Heroku application&lt;/li&gt;
+  &lt;li&gt;Set your buildpack to Heroku’s default Ruby buildpack&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;heroku buildpacks:set heroku/ruby&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Append the buildpack-ruby-rake-deploy-tasks to your buildpack list&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;heroku buildpacks:add https://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Configure DEPLOY_TASK environment variable&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;heroku config:set &lt;span class=&quot;nv&quot;&gt;DEPLOY_TASKS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;build_libraries&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Deploy and navigate to your application’s root path.&lt;/p&gt;
+
+&lt;h2 id=&quot;example-script&quot;&gt;Example script&lt;/h2&gt;
+
+&lt;p&gt;All you need to do is create a bash script to compile your library.&lt;/p&gt;
+
+&lt;p&gt;This is an example for the GEOS library:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;LIBRARY_VERSION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3.6.2
+
+curl &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; http://download.osgeo.org/geos/geos-&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LIBRARY_VERSION&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;.tar.bz2 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-xjvf&lt;/span&gt; geos-&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LIBRARY_VERSION&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;.tar.bz2 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;geos-&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LIBRARY_VERSION&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./configure &lt;span class=&quot;nt&quot;&gt;--prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HEROKU_VENDOR_DIR&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; make &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; make &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HEROKU_VENDOR_DIR&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-czvf&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;TARGET_DIR&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/geos-&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LIBRARY_VERSION&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-heroku&lt;/span&gt;.tar.gz .&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/tagliala/vesuvius&quot;&gt;Vesuvius&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.saintsjd.com/2014/05/12/run-vendored-binaries-on-heroku.html&quot;&gt;Run Vendored Binaries on Heroku&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://devcenter.heroku.com/articles/stack-packages&quot;&gt;Ubuntu Packages on Heroku Stacks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Using RGeo with GEOS on Heroku</title>
+   <link href="http://www.diowa.com/blog/heroku/2016/02/26/using-rgeo-with-geos-on-heroku"/>
+   <updated>2016-02-26T00:00:00+01:00</updated>
+   <id>http://www.diowa.com/blog/heroku/2016/02/26/using-rgeo-with-geos-on-heroku</id>
+   <content type="html">
+&lt;p&gt;We had some struggles making RGeo work on Heroku with GEOS extension. Web lacks of updated information about this topic, the purpose of this post is to collect existing information and update them.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h3 id=&quot;update-august-14th-2019&quot;&gt;Update! August, 14th 2019&lt;/h3&gt;
+
+&lt;p&gt;Well, well, well… Apparently this buildpack does not work anymore.&lt;/p&gt;
+
+&lt;p&gt;It has been deprecated in favour of https://github.com/diowa/heroku-buildpack-vendorbinaries
+or &lt;a href=&quot;/blog/heroku/2017/08/01/using-rgeo-with-geos-on-heroku-with-apt-get&quot;&gt;Using RGeo with GEOS on Heroku with apt-get&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;update-august-13th-2019&quot;&gt;Update! August, 13th 2019&lt;/h3&gt;
+
+&lt;p&gt;Add a release rake tasks&lt;/p&gt;
+
+&lt;h3 id=&quot;update-august-1st-2017&quot;&gt;Update! August, 1st 2017&lt;/h3&gt;
+
+&lt;p&gt;Please take a look at the new article: &lt;a href=&quot;/blog/heroku/2017/08/01/using-rgeo-with-geos-on-heroku-with-apt-get&quot;&gt;Use RGeo with GEOS on Heroku via apt-get&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;update-july-1st-2016&quot;&gt;Update! July, 1st 2016&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BUILDPACK_URL&lt;/code&gt; was deprecated, so here it is a new approach.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-compile-libraries-optional&quot;&gt;1. Compile libraries (optional)&lt;/h3&gt;
+
+&lt;p&gt;Take a look at &lt;a href=&quot;/blog/heroku/2017/08/01/compile-libraries-on-heroku-with-vesuvius&quot;&gt;Compile libraries on Heroku with Vesuvius&lt;/a&gt; and&lt;/p&gt;
+
+&lt;h3 id=&quot;2-set-up-multiple-buildpacks&quot;&gt;2. Set up multiple buildpacks&lt;/h3&gt;
+
+&lt;p&gt;We need to set &lt;code class=&quot;highlighter-rouge&quot;&gt;LD_LIBRARY_PATH&lt;/code&gt; config variable to &lt;code class=&quot;highlighter-rouge&quot;&gt;/app/lib&lt;/code&gt; and use the following buildpacks:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;https://github.com/diowa/heroku-buildpack-rgeo-prep.git&lt;/p&gt;
+
+    &lt;p&gt;&lt;em&gt;Overwrites Heroku’s default .bundle/config to set BUNDLE_BUILD__RGEO to Heroku’s build directory&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;https://github.com/peterkeen/heroku-buildpack-vendorbinaries.git&lt;/p&gt;
+
+    &lt;p&gt;&lt;em&gt;Allows us to vendor binaries into our project&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;heroku/ruby&lt;/p&gt;
+
+    &lt;p&gt;&lt;em&gt;The official Heroku Buildpack for Ruby, Rack, and Rails apps&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We have a couple of way of achieving this:&lt;/p&gt;
+
+&lt;h4 id=&quot;method-1-using-appjson&quot;&gt;Method 1: Using app.json&lt;/h4&gt;
+
+&lt;p&gt;You need the following entries:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;...&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;env&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;...&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;LD_LIBRARY_PATH&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/app/lib&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;...&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;...&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;buildpacks&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://github.com/diowa/heroku-buildpack-rgeo-prep.git&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://github.com/peterkeen/heroku-buildpack-vendorbinaries.git&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;heroku/ruby&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;method-2-using-the-console&quot;&gt;Method 2: Using the console&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;heroku buildpacks:set https://github.com/diowa/heroku-buildpack-rgeo-prep.git
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;heroku buildpacks:add https://github.com/peterkeen/heroku-buildpack-vendorbinaries.git
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;heroku buildpacks:add heroku/ruby
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;heroku config:set &lt;span class=&quot;nv&quot;&gt;LD_LIBRARY_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/app/lib&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;3-provide-urls-of-vendor-libraries&quot;&gt;3. Provide URLs of vendor libraries&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Vendor Binaries&lt;/strong&gt; buildpack expects a &lt;code class=&quot;highlighter-rouge&quot;&gt;.vendor_urls&lt;/code&gt; file in the root of the repository containing publicly accessible URLs to the libraries compiled at step 1.&lt;/p&gt;
+
+&lt;p&gt;Here it is a working example:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://s3.amazonaws.com/diowa-buildpacks/geos-3.6.1-heroku.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add this file to git and make sure it ends with a newline.&lt;/p&gt;
+
+&lt;h3 id=&quot;4-deploy&quot;&gt;4. Deploy&lt;/h3&gt;
+
+&lt;p&gt;Deploy to Heroku. Please note that if you have already installed rgeo, you need
+to recompile the gem.&lt;/p&gt;
+
+&lt;p&gt;Check the deploy log:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# bad&lt;/span&gt;
+remote:        Using rgeo 0.6.0
+
+&lt;span class=&quot;c&quot;&gt;# good&lt;/span&gt;
+remote:        Installing rgeo 0.6.0 with native extensions&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You can force recompiling in two ways:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Downgrade to a previous version of rgeo (0.5.3), deploy, rollback, deploy again;&lt;/li&gt;
+  &lt;li&gt;Using the &lt;a href=&quot;https://github.com/heroku/heroku-repo&quot;&gt;heroku repo&lt;/a&gt; plugin, running &lt;code class=&quot;highlighter-rouge&quot;&gt;heroku repo:purge_cache -a appname&lt;/code&gt; and deploying again (recommended).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;5-check&quot;&gt;5. Check&lt;/h3&gt;
+
+&lt;p&gt;You can check that everything is working by running &lt;code class=&quot;highlighter-rouge&quot;&gt;heroku run console&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RGeo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Geos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;supported?&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;6-optional-release-task&quot;&gt;6. Optional Release task&lt;/h3&gt;
+
+&lt;p&gt;You may be interested in checking that RGeo properly supports GEOS at deploy
+time. If something goes wrong, the deploy will fail.&lt;/p&gt;
+
+&lt;p&gt;Add a &lt;code class=&quot;highlighter-rouge&quot;&gt;release&lt;/code&gt; entry to your &lt;code class=&quot;highlighter-rouge&quot;&gt;Procfile&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;release: bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;rails rgeo_supports_geos&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Create a rake task:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# frozen_string_literal: true&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Check if RGeo supports GEOS'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:rgeo_supports_geos&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;abort&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Error: RGeo does not support GEOS.'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RGeo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Geos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;supported?&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This guide could also be applied to proj.4. Take a look at our &lt;a href=&quot;https://github.com/diowa/heroku-buildpack-rgeo-prep&quot;&gt;rgeo-prep buildpack&lt;/a&gt; if you need both libraries.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.saintsjd.com/2014/05/12/run-vendored-binaries-on-heroku.html&quot;&gt;Run Vendored Binaries on Heroku&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://web.archive.org/web/20120417213149/http://devcenter.spacialdb.com/Heroku.html&quot;&gt;SpacialDB on Heroku&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://devcenter.heroku.com/articles/buildpacks&quot;&gt;Buildpacks&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://devcenter.heroku.com/articles/using-multiple-buildpacks-for-an-app&quot;&gt;Using Multiple Buildpacks for an App&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://devcenter.heroku.com/articles/app-json-schema#buildpacks&quot;&gt;app.json Schema&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://devcenter.heroku.com/articles/release-phase&quot;&gt;Release Phase&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Using one carrierwave image uploader with dynamic versions</title>
+   <link href="http://www.diowa.com/blog/rails/2014/03/22/using-one-carrierwave-image-uploader-with-dynamic-versions"/>
+   <updated>2014-03-22T00:00:00+01:00</updated>
+   <id>http://www.diowa.com/blog/rails/2014/03/22/using-one-carrierwave-image-uploader-with-dynamic-versions</id>
+   <content type="html">
+&lt;p&gt;I was looking for a cleaner approach to manage models with different image versions. I came into &lt;a href=&quot;http://andreapavoni.com/blog/2012/3/using-one-carrierwave-image-uploader-with-different-sizes-on-several-models&quot;&gt;this awesome blog post&lt;/a&gt; by &lt;a href=&quot;http://andreapavoni.com/&quot;&gt;Andrea Pavoni&lt;/a&gt;. I needed multiple, configurable processes so I extended and updated his excellent work.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h3 id=&quot;update-november-1st-2014&quot;&gt;Update! November, 1st 2014&lt;/h3&gt;
+&lt;p&gt;Improved the code with an initializer. This fixes an edge case with Rails Admin (versions are not created when validations fails). Now we will not pollute models with image versions and we can use the same versions for multiple models but there is a little bit of separation as a drawback.&lt;/p&gt;
+
+&lt;p&gt;We also improved the image uploader in order to provide progressive jpegs.&lt;/p&gt;
+
+&lt;h4 id=&quot;image_versions_rb-initializer&quot;&gt;image_versions_.rb (initializer)&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;APP_IMAGE_VERSIONS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;ss&quot;&gt;asset: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;fill_1200x518: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;resize_to_fill: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;518&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;black_and_white: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;resize_to_limit: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;desaturate: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;ss&quot;&gt;gallery: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;fill_800x600: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;resize_to_fill: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;800&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;600&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;APP_ALL_IMAGE_VERSIONS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;APP_IMAGE_VERSIONS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;keys&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;uniq&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;slideshow_imagerb&quot;&gt;slideshow_image.rb&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SlideshowImage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+
+  &lt;span class=&quot;no&quot;&gt;IMAGE_VERSIONS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;APP_IMAGE_VERSIONS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:asset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;mount_uploader&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ImageUploader&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;image_uploaderrb&quot;&gt;image_uploader.rb&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ImageUploader&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;CarrierWave&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Uploader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;CarrierWave&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;MiniMagick&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;storage&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:file&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;store_dir&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;uploads/&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;underscore&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mounted_as&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;process&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;resize_to_limit: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2048&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2048&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;process&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:optimize&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# better to always have a thumbnail version because it is used by Rails Admin&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:thumbnail&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;process&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;resize_to_fit: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;no&quot;&gt;APP_ALL_IMAGE_VERSIONS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;if: &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uploader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;opts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;uploader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;IMAGE_VERSIONS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;has_key?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;process&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;dynamic_version: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;process&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:optimize&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dynamic_version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;IMAGE_VERSIONS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# Note: this process requires a recent version of ImageMagick&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;desaturate&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;manipulate!&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;colorspace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Gray'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;brightness_contrast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'20x0'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;block_given?&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;optimize&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;manipulate!&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;combine_options&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;strip&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;quality&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'85'&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;depth&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'8'&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;interlace&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Line'&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;extension_white_list&lt;/span&gt;
+    &lt;span class=&quot;sx&quot;&gt;%w(jpg jpeg gif png)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# Override the filename of the uploaded files:&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# Avoid using model.id or version_name here, see uploader/store.rb for details.&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# def filename&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#   &quot;something.jpg&quot; if original_filename&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Suggestions to improve this are always appreciated!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Print merge on Google Drive with autoCrat</title>
+   <link href="http://www.diowa.com/blog/productivity/2014/01/24/print-merge-on-google-drive"/>
+   <updated>2014-01-24T00:00:00+01:00</updated>
+   <id>http://www.diowa.com/blog/productivity/2014/01/24/print-merge-on-google-drive</id>
+   <content type="html">
+&lt;p&gt;We were looking for a way to create simple invoices using a “print merge” approach that wouldn’t require offline software. We wanted a solution on the cloud, free, compatible with Google Drive and possibly open source.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h3 id=&quot;update-february-25th-2016&quot;&gt;Update! February, 25th 2016&lt;/h3&gt;
+&lt;p&gt;You should use the last version of autoCrat. Examples here are not up to date, sorry.&lt;/p&gt;
+
+&lt;h3 id=&quot;update-may-4th-2015&quot;&gt;Update! May, 4th 2015&lt;/h3&gt;
+&lt;p&gt;After April 20th, autoCrat script stopped working again. Here it is a fix:&lt;/p&gt;
+
+&lt;p&gt;Go to Tools -&amp;gt; Script Editor. Then go to Edit -&amp;gt; Find and replace.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Find &lt;code class=&quot;highlighter-rouge&quot;&gt;DocsList&lt;/code&gt; and replace all with &lt;code class=&quot;highlighter-rouge&quot;&gt;DriveApp&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Find &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;document&quot;&lt;/code&gt; (both lowercase and uppercase, with quotes) and replace all with &lt;code class=&quot;highlighter-rouge&quot;&gt;MimeType.GOOGLE_DOCS&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Find &lt;code class=&quot;highlighter-rouge&quot;&gt;getFileType&lt;/code&gt; and replace all with &lt;code class=&quot;highlighter-rouge&quot;&gt;getMimeType&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Find &lt;code class=&quot;highlighter-rouge&quot;&gt;file.addToFolder(folder)&lt;/code&gt; and replace all with &lt;code class=&quot;highlighter-rouge&quot;&gt;folder.addFile(file)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Find &lt;code class=&quot;highlighter-rouge&quot;&gt;copy.addToFolder(parent)&lt;/code&gt; and replace with &lt;code class=&quot;highlighter-rouge&quot;&gt;parent.addFile(copy)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Find &lt;code class=&quot;highlighter-rouge&quot;&gt;pdfFile.addToFolder(secondaryFolder)&lt;/code&gt; and replace with &lt;code class=&quot;highlighter-rouge&quot;&gt;secondaryFolder.addFile(pdfFile)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Find &lt;code class=&quot;highlighter-rouge&quot;&gt;file.addToFolder(secondaryFolder)&lt;/code&gt; and replace with &lt;code class=&quot;highlighter-rouge&quot;&gt;secondaryFolder.addFile(file)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Find &lt;code class=&quot;highlighter-rouge&quot;&gt;copy.removeFromFolder(root)&lt;/code&gt; and replace with &lt;code class=&quot;highlighter-rouge&quot;&gt;DriveApp.removeFile(copy)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Find &lt;code class=&quot;highlighter-rouge&quot;&gt;pdfFile.removeFromFolder(DriveApp.getRootFolder())&lt;/code&gt; and replace with &lt;code class=&quot;highlighter-rouge&quot;&gt;DriveApp.removeFile(pdfFile)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Find &lt;code class=&quot;highlighter-rouge&quot;&gt;file.removeFromFolder(DriveApp.getRootFolder())&lt;/code&gt; and replace with &lt;code class=&quot;highlighter-rouge&quot;&gt;DriveApp.removeFile(file)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Credits: &lt;a href=&quot;https://code.google.com/p/google-apps-script-issues/issues/detail?id=5017&quot;&gt;ReferenceError: “DocsList” is not defined&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;update-october-13th-2014&quot;&gt;Update! October, 13th 2014&lt;/h3&gt;
+&lt;p&gt;After September 30th, autoCrat script stopped working. Here it is a simple fix:&lt;/p&gt;
+
+&lt;p&gt;Go to Tools -&amp;gt; Script Editor. Then go to Edit -&amp;gt; Find and replace.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Find &lt;code class=&quot;highlighter-rouge&quot;&gt;createDecordatedPopupPanel&lt;/code&gt; and replace all with &lt;code class=&quot;highlighter-rouge&quot;&gt;createPopupPanel&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Find &lt;code class=&quot;highlighter-rouge&quot;&gt;DocsListDialog()&lt;/code&gt; and replace all with &lt;code class=&quot;highlighter-rouge&quot;&gt;DocsListDialog().setOAuthToken(ScriptApp­.getOAuthToken())&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Credits:
+&lt;a href=&quot;https://plus.google.com/u/0/+RhondaJenkins61/posts/fsNTY9zu6Q2&quot;&gt;Having trouble with Autocrat…&lt;/a&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=On52heyNLPI&quot;&gt;Fix for Failed UI on Drive Picker for autoCrat, Doctopus, and formRat&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Fortunately there is &lt;a href=&quot;http://cloudlab.newvisions.org/scripts/autocrat&quot;&gt;autoCrat&lt;/a&gt;, a &lt;a href=&quot;https://developers.google.com/apps-script/&quot;&gt;Google Apps Script&lt;/a&gt; that meets our requirements and we want to share our experience.&lt;/p&gt;
+
+&lt;p&gt;autoCrat has a very good documentation and a video tutorial, it was very simple to setup and use. There are some issues with formatted fields (dates, currencies…) but we found a very simple workaround. Let’s say the field &lt;code class=&quot;highlighter-rouge&quot;&gt;B2&lt;/code&gt; contains January, 20th 2014 (in date format). autoCrat will produce &lt;strong&gt;Mon Jan 20 2014 00:00:00 GMT+0100 (CET)&lt;/strong&gt;. You can add a new cell with the formula &lt;code class=&quot;highlighter-rouge&quot;&gt;=TEXT(B2; &quot;mm-dd-yyyy&quot;)&lt;/code&gt; and instruct autoCrat to use the new column. We did the same thing for money values (&lt;code class=&quot;highlighter-rouge&quot;&gt;=TEXT(F2; &quot;$ #,###.00&quot;)&lt;/code&gt;). After doing this, you can hide these “helpers” columns in the spreadsheet.&lt;/p&gt;
+
+&lt;p&gt;A working example is available &lt;a href=&quot;https://drive.google.com/folderview?id=0B1PWGPmnhgWhU2dtd3k0RVpwQzA&amp;amp;usp=drive_web&quot;&gt;in this Google Drive shared folder&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;All comments and suggestions are welcome.&lt;/p&gt;
+
+&lt;p&gt;&lt;small&gt;Names, addresses and companies were generated via &lt;a href=&quot;http://www.fakenamegenerator.com/&quot;&gt;Fake Name Generator&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Nitrous.IO: Rails development inside your browser</title>
+   <link href="http://www.diowa.com/blog/rails/2013/07/22/nitrous-io-rails-development-inside-your-browser"/>
+   <updated>2013-07-22T00:00:00+02:00</updated>
+   <id>http://www.diowa.com/blog/rails/2013/07/22/nitrous-io-rails-development-inside-your-browser</id>
+   <content type="html">
+&lt;p&gt;Years ago I was amused by Heroku giving the possibility to do development inside a web IDE. That product was called &lt;a href=&quot;http://web.archive.org/web/20090121092638/http://herokugarden.com/&quot;&gt;Heroku Garden&lt;/a&gt; but it was discontinued and Heroku focused only on easing the deployment of web apps.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Nowadays deployment is pretty much automated while development still happens on a local machine where you need to install all the relevant software like web servers, database servers, SDKs, etc. You have to do this only once per machine, but it is a very time consuming process and if for some reasons you don’t have your machine with you, you are not able to work on your projects, even though your code is probably already hosted on GitHub and accessible from everywhere.&lt;/p&gt;
+
+&lt;p&gt;Nitrous.IO tries to fix that and gives you the ability to do web development inside a browser from any computer connected to the Internet. In this blog post I will show how to set up a Nitrous.IO box to work on &lt;a href=&quot;https://github.com/diowa/ruby2-rails4-bootstrap-heroku&quot;&gt;Ruby2 Rails4 Bootstrap Heroku Starter App&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-create-a-box&quot;&gt;1. Create a box&lt;/h3&gt;
+
+&lt;p&gt;The first thing to do is to &lt;a href=&quot;https://www.nitrous.io/join/rAkwYY7Gqog&quot;&gt;create a box on Nitrous.IO&lt;/a&gt; (note: this is a referral link. &lt;a href=&quot;https://www.nitrous.io/join&quot;&gt;This one is a link without referral&lt;/a&gt;). You need at least 190 N2O to get 512MB of memory (the minimum amount of memory required to run our starter app). When you sign up at Nitrous.IO you get 150 N2O. To get extra N2O you can either pay or &lt;a href=&quot;https://www.nitrous.io/app#/n2o/bonus&quot;&gt;link your social accounts and invite colleagues to try the service&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-set-up-ssh-github-and-heroku&quot;&gt;2. Set up SSH, GitHub and Heroku&lt;/h3&gt;
+
+&lt;p&gt;Now you have to follow these steps:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://help.nitrous.io/ssh-add/&quot;&gt;Create a new SSH key&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://help.nitrous.io/github-add-key/&quot;&gt;Link your GitHub account&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://help.nitrous.io/heroku/&quot;&gt;Integrate with Heroku&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-set-up-databases&quot;&gt;3. Set up databases&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://postgres.heroku.com/&quot;&gt;Create two free dev plan databases with Heroku Postgres&lt;/a&gt;, one for development and one for testing.&lt;/p&gt;
+
+&lt;p&gt;The Rails4 starter app we are going to use has a &lt;a href=&quot;https://github.com/diowa/ruby2-rails4-bootstrap-heroku/blob/master/config/database.yml&quot;&gt;database.yml&lt;/a&gt; file configured to work on Nitrous.IO, TravisCI and a local machine (comments and pull requests are welcome).&lt;/p&gt;
+
+&lt;p&gt;Once you create these 2 databases, open the web IDE for your Nitrous.IO box and add the following lines to &lt;code class=&quot;highlighter-rouge&quot;&gt;.bashrc&lt;/code&gt; file in your home (Tip: if you cannot see that file from the editor is probably because you have to enable the option to show hidden files):&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTER_APP_DEV_DB_DATABASE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_DEV_DB_DATABASE
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTER_APP_DEV_DB_USER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_DEV_DB_USER
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTER_APP_DEV_DB_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_DEV_DB_PASSWORD
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTER_APP_DEV_DB_HOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_DEV_DB_HOST
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTER_APP_DEV_DB_PORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_DEV_DB_PORT
+
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTER_APP_TEST_DB_DATABASE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_TEST_DB_DATABASE
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTER_APP_TEST_DB_USER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_TEST_DB_USER
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTER_APP_TEST_DB_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_TEST_DB_PASSWORD
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTER_APP_TEST_DB_HOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_TEST_DB_HOST
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTER_APP_TEST_DB_PORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_TEST_DB_PORT&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;4-clone-the-starter-app&quot;&gt;4. Clone the starter app&lt;/h3&gt;
+
+&lt;p&gt;Use the standard git commands to clone Ruby2 Rails4 Bootstrap Starter App inside your Nitrous.IO box shell:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;workspace
+git clone https://github.com/diowa/ruby2-rails4-bootstrap-heroku.git
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;ruby2-rails4-bootstrap-heroku
+bundle&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Test that specs pass:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;rspec&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Start the server and check that everything works from the Preview menu item (default port is 3000).&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;rails s&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;5-deploy-on-heroku&quot;&gt;5. Deploy on Heroku&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;heroku create
+git push heroku master&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;considerations&quot;&gt;Considerations&lt;/h3&gt;
+
+&lt;p&gt;Being able to work on your projects without carrying your machine is a great freedom, but it comes at a price: the web ide is not that productive. Simple things like a global search and replace require you to master the command line. I certainly miss TextMate, &lt;a href=&quot;http://nvie.com/posts/a-successful-git-branching-model/&quot;&gt;git-flow&lt;/a&gt; or something like GitX. A viable compromise is to install &lt;a href=&quot;https://www.nitrous.io/mac&quot;&gt;Nitrous.IO for Mac&lt;/a&gt; if you work on a Mac, so that you can just install your favorite text editor and git GUI.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Ruby2 Rails4 Bootstrap Heroku</title>
+   <link href="http://www.diowa.com/blog/open%20source/2013/06/25/ruby2-rails4-bootstrap-heroku"/>
+   <updated>2013-06-25T00:00:00+02:00</updated>
+   <id>http://www.diowa.com/blog/open%20source/2013/06/25/ruby2-rails4-bootstrap-heroku</id>
+   <content type="html">
+&lt;p&gt;Rails 4 brings many cool new features like &lt;a href=&quot;https://github.com/rails/turbolinks/&quot;&gt;Turbolinks&lt;/a&gt; and &lt;a href=&quot;https://github.com/rails/strong_parameters&quot;&gt;Strong Parameters&lt;/a&gt;. We already used these gems and as soon as Rails 4 has been released we created a starter app that includes Twitter Bootstrap, Font Awesome and some other defaults like &lt;a href=&quot;http://rspec.info&quot;&gt;Rspec&lt;/a&gt; and &lt;a href=&quot;http://haml.info/&quot;&gt;HAML&lt;/a&gt;.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;In order to use it all you have to do is:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone https://github.com/diowa/ruby2-rails4-bootstrap-heroku.git&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;If you want to deploy it on Heroku:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;ruby2-rails4-bootstrap-heroku
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;heroku create
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push heroku master&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Add likes to your Mongoid models</title>
+   <link href="http://www.diowa.com/blog/open%20source/rubygems/2012/11/08/add-likes-to-your-mongoid-models"/>
+   <updated>2012-11-08T00:00:00+01:00</updated>
+   <id>http://www.diowa.com/blog/open%20source/rubygems/2012/11/08/add-likes-to-your-mongoid-models</id>
+   <content type="html">
+&lt;p&gt;We needed a way to add likes to stories for &lt;a href=&quot;http://beta.minstrels.com&quot;&gt;Minstrels&lt;/a&gt;. We started looking for gems that provide this functionality and we found &lt;a href=&quot;http://github.com/tombell/mongoid-voteable&quot;&gt;tombell/mongoid-voteable&lt;/a&gt;, that does a little more by providing a voting system to mongoid models. So we decided to fork this gem and focus only on likes. Today we gave it back to the open source community.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h3 id=&quot;installation&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;p&gt;add the gem to your &lt;code class=&quot;highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;gem &lt;span class=&quot;s1&quot;&gt;'mongoid-likeable'&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;usage&quot;&gt;Usage&lt;/h3&gt;
+
+&lt;p&gt;Include the &lt;code class=&quot;highlighter-rouge&quot;&gt;Mongoid::Likeable&lt;/code&gt; module to the models you want to like.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Story&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Mongoid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Document&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Mongoid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Likeable&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You can like a story by simply using the &lt;code class=&quot;highlighter-rouge&quot;&gt;like&lt;/code&gt; method on the model.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;vi&quot;&gt;@story&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Story&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;first&lt;/span&gt;
+&lt;span class=&quot;vi&quot;&gt;@user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;first&lt;/span&gt;
+
+&lt;span class=&quot;vi&quot;&gt;@story&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;like&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@user&lt;/span&gt;
+&lt;span class=&quot;vi&quot;&gt;@story&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unlike&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@user&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;There is also a method to check if a user liked a model.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;vi&quot;&gt;@story&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;liked?&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@user&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# true if the user has already liked this&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Likes are stored in a field called &lt;code class=&quot;highlighter-rouge&quot;&gt;likes&lt;/code&gt;, so you can sort models by like count.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: if your users are not stored in a Mongo collection or the ID field is
+not called &lt;code class=&quot;highlighter-rouge&quot;&gt;_id&lt;/code&gt;, you can still pass the ID in as the second parameter instead.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;vi&quot;&gt;@story&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;like&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;id&lt;/span&gt;
+
+&lt;span class=&quot;vi&quot;&gt;@story&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;liked?&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;id&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>icare: carpooling goes open source</title>
+   <link href="http://www.diowa.com/blog/products/2012/09/06/icare-carpooling-goes-open-source"/>
+   <updated>2012-09-06T00:00:00+02:00</updated>
+   <id>http://www.diowa.com/blog/products/2012/09/06/icare-carpooling-goes-open-source</id>
+   <content type="html">
+&lt;p&gt;We are passionate about the Sharing Economy and we are glad to present icare, an open source carpooling platform based on the technology stack of &lt;a href=&quot;http://beta.minstrels.com/&quot;&gt;Minstrels&lt;/a&gt;.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p&gt;icare is an open source carpooling platform powered by MongoDB and Ruby on Rails &lt;a href=&quot;http://t.co/VWNk8wRAAC&quot;&gt;http://t.co/VWNk8wRAAC&lt;/a&gt;&lt;/p&gt;&amp;mdash; MongoDB (@MongoDB) &lt;a href=&quot;https://twitter.com/MongoDB/statuses/316844640227696640&quot;&gt;March 27, 2013&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;h6 class=&quot;text-muted&quot;&gt;Tweet from the official MongoDB account&lt;/h6&gt;
+
+&lt;p&gt;Carpooling (also known as car-sharing, ride-sharing, lift-sharing and covoiturage), is the sharing of car journeys so that more than one person travels in a car. By having more people using one vehicle, carpooling reduces each person’s travel costs such as fuel costs, tolls, and the stress of driving. Carpooling is also seen as a more environmentally friendly and sustainable way to travel as sharing journeys reduces carbon emissions, traffic congestion on the roads, and the need for parking spaces. Authorities often encourage carpooling, especially during high pollution periods and high fuel prices. (From Wikipedia)&lt;/p&gt;
+
+&lt;p&gt;A demo of the product is available here: &lt;a href=&quot;http://icare.diowa.com/&quot;&gt;icare.diowa.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This kind of application requires trust among members. We allow registration only via Facebook because their policies about real people and real names fit our needs.&lt;/p&gt;
+
+&lt;p&gt;We have been asked to customize icare for enterprises and basing on these experiences we made our own product: &lt;a href=&quot;http://www.companycarpool.com&quot;&gt;Company Carpool&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+
+</feed>
