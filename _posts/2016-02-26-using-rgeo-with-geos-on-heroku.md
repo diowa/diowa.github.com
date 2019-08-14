@@ -14,6 +14,13 @@ We had some struggles making RGeo work on Heroku with GEOS extension. Web lacks 
 
 <!--more-->
 
+### Update! August, 14th 2019
+
+Well, well, well... Apparently this buildpack does not work anymore.
+
+It has been deprecated in favour of https://github.com/diowa/heroku-buildpack-vendorbinaries
+or [Using RGeo with GEOS on Heroku with apt-get]({% post_url 2017-08-01-using-rgeo-with-geos-on-heroku-with-apt-get %})
+
 ### Update! August, 13th 2019
 
 Add a release rake tasks
@@ -138,9 +145,9 @@ Create a rake task:
 {% highlight ruby %}
 # frozen_string_literal: true
 
-desc 'Check that RGeo supports GEOS'
+desc 'Check if RGeo supports GEOS'
 task :rgeo_supports_geos do
-  abort 'Error: RGeo does not support GEOS, application cannot start.' unless RGeo::Geos.supported?
+  abort 'Error: RGeo does not support GEOS.' unless RGeo::Geos.supported?
 end
 {% endhighlight %}
 

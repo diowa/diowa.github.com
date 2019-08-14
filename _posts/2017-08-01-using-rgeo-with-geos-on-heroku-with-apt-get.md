@@ -102,9 +102,9 @@ Create a rake task:
 {% highlight ruby %}
 # frozen_string_literal: true
 
-desc 'Check that RGeo supports GEOS'
+desc 'Check if RGeo supports GEOS'
 task :rgeo_supports_geos do
-  abort 'Error: RGeo does not support GEOS, application cannot start.' unless RGeo::Geos.supported?
+  abort 'Error: RGeo does not support GEOS.' unless RGeo::Geos.supported?
 end
 {% endhighlight %}
 
